@@ -1,0 +1,27 @@
+footer{
+    display: flex;
+    padding: 30px;
+    background-color: #172337;
+    color: white;
+ }
+ 
+ footer>div{
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+ }
+ 
+.s-logos{
+    width: 40px;
+    filter: brightness(90);
+ }
+
+ #social{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+ }
+
+ #social a{
+    padding: 5%;
+ }
