@@ -1,0 +1,180 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav {
+    display: flex;
+    padding: 0.5% 13%;
+    justify-content: space-evenly;
+    position: sticky;
+    top: 0;
+    background-color: #2874f0;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#logo {
+    width: 15%;
+    height: 65px;
+}
+
+#search-btn {
+    width: 15px;
+}
+
+#search-div {
+    width: 33%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+#search-div>input {
+    border: none;
+    width: 90%;
+}
+
+#search-div>input:focus {
+    outline: none;
+}
+
+#search-div>button {
+    background: none;
+    border: none;
+}
+
+#login-btn {
+    margin: auto;
+    padding: 5px 20px;
+    background-color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+nav>p {
+    margin: auto;
+}
+
+nav>div {
+    margin: auto;
+    width: 10%;
+}
+
+#cart {
+    width: 20%;
+}
+
+#profile-popup {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
+    position: fixed;
+    top: 45px;
+    margin-left: 50%;
+    visibility: hidden;
+    z-index: 1;
+}
+
+
+/* Profile Popup */
+#profile-popup img {
+    width: 18px;
+    margin: auto;
+    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(100%) contrast(80%);
+}
+
+#profile-popup>p {
+    padding: 0px 10px;
+}
+
+#profile-popup>a {
+    padding: 13px 20px;
+    border-bottom: 0.3px solid rgb(166, 166, 166);
+    text-decoration: none;
+}
+
+#profile-popup>a:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+/* Login Popup & Register popup */
+#login-popup, #register-popup {
+    visibility: hidden;
+    width: 50vw;
+    height: 70vh;
+    padding: 20px;
+    display: flex;
+    background-color: white;
+    top: 15vh;
+    left: 25vw;
+    position: fixed;
+    border-radius: 5px;
+    padding: 0;
+    z-index: 3;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+#login-popup>div:nth-child(1), #register-popup>div:nth-child(1){
+    width: 30%;
+    padding: 20px 30px;
+    background-color: #62d1cd;
+    color: white;
+}
+
+#login-popup:hover, #register-popup:hover{
+    cursor: pointer;
+}
+
+#login-popup>div:nth-child(2){
+    padding: 10%;
+}
+
+#register-popup>div:nth-child(2){
+    width: 50%;
+    padding: 2% 5%;
+}
+
+
+#login-popup>div:nth-child(2)>img, #register-popup>div:nth-child(2)>img{
+    width: 20px;
+    align-self: right;
+    position: absolute;
+    top: 2vh;
+    right: 1vw;
+}
+
+#login-form , #register-form{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    width: 100%;
+}
+
+#login-form>input, #register-form>input{
+    padding: 10px; 
+    margin-bottom: 20px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+}
+
+#login-form>input[type="submit"], #register-form>input[type="submit"]{
+    border: none;
+    background-color: rgb(7, 185, 185);
+    color: aliceblue;
+    letter-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#login-form>input[type="submit"]:hover, #register-form>input[type="submit"]:hover{
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    background-color: rgb(77, 210, 210);
+    color: black;
+}

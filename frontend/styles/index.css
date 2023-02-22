@@ -1,0 +1,63 @@
+
+#category{
+    display: flex;
+    justify-content: space-evenly;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#category>div{
+    width: 9%;
+    text-align: center;
+}
+
+#category>div img{
+    width: 80%;
+    margin: 0;
+    padding: 0;
+}
+
+#slider{
+    margin: 10px;
+}
+
+#slider>img{
+    width: 100%;
+}
+
+#top-offers{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+
+#top-offers>div{
+    width: 23%;
+    margin: 10px 0px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+
+#top-offers>div>img{
+    width: 98%;
+    margin: auto;
+}
+
+#mid-sec{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#mid-sec img{
+    width: 100%;
+}
+
+#b-offers{
+    width: 100%;
+}
+
+#b-offers>img{
+    width: 100%;
+}
