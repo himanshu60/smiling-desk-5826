@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(26, 26, 26);
+}
+
+#navbar{
+    width: 100;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: rgb(50, 171, 171);
+}
+
+#nav-btns{
+    width: 50%;
+    padding: 20px 0px;
+    align-items: center;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+#nav-btns>a{
+    text-decoration: none;
+    font-size: 23px;
+    color: aliceblue;
+}
+
+#nav-btns>a::after{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 0%;
+    transition: 0.4s;
+}
+
+#nav-btns>a:hover::after{
+    height: 2px;
+    width: 100%;
+    background-color: white;
+}

@@ -9,9 +9,12 @@ const banner_imgs = [
 const categories = document.querySelectorAll("#category p");
 categories.forEach((el)=>{
   el.addEventListener("click", ()=>{
-    window.location.href = "#";
+    window.location.href = "products.html";
   })
 })
+
+
+
 
 
 displayImg();

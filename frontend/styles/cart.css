@@ -1,0 +1,125 @@
+#cart-items{
+    display: flex;
+    margin: auto;
+    padding: 15px;
+    justify-content: space-evenly;
+}
+
+#cart1{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 60%;
+}
+
+#cart1>div>img{
+    width: 100%;
+}
+
+#cart1>div>p{
+    color: rgb(102, 102, 102);
+    text-overflow:ellipsis;
+    overflow:hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+ }
+
+ 
+#cart1>div>h2{
+    font-weight: 530;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    
+  }
+  
+  #cart1>div>button{
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+  #cart1>div>button:hover{
+    box-shadow: none;
+  }
+  
+  #cart1>div>h3{
+    font-weight: 530;
+}
+
+
+#cart1 span{
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  width: 40%;
+  justify-content: space-between;
+  text-align: left;
+}
+
+h1{
+  text-align: center;
+  font-weight: 500;
+}
+
+#order-summary{
+  border: 1px solid black;
+  width: 30%;
+  padding: 0.5rem 1rem;
+  height: fit-content;
+  border-radius: 5px;
+
+}
+#order-summary>p:nth-child(1){
+  text-align: center;
+}
+
+#order-summary>div{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+}
+
+
+#cart1 span>button{
+  background-color: white;
+  border: 0.3px solid grey;
+  border-radius: 2%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+
+#mtcart{
+  text-align: center;
+  position: absolute;
+  right: 40%;
+  top: 40vh;
+}
+
+#order-summary button{
+  width: 100%;
+  padding: 10px;
+  margin:  10px auto;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#order-summary button:hover{
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+#orders-page{
+  display: flex;
+  justify-content: right;
+  padding: 0px 50px;
+}

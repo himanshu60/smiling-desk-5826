@@ -1,0 +1,25 @@
+#users{
+    text-align: center;
+    color: aliceblue;
+    margin: auto;
+    width: 70%;
+}
+
+#users table{
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    box-shadow: rgba(253, 253, 253, 0.2) 0px 2px 8px 0px;
+}
+
+#users th{
+    background-color: aquamarine;
+    color: black;
+}
+
+#users td, #users th{
+    border: 1px solid white;
+    padding: 15px;
+    
+}
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click & Collect | Admin Project</title>
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link rel="stylesheet" href="./styles/home.css">
+    <link rel="shortcut icon" href="../Frontend/images/supermart-favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div id="navbar">
+      <!-- navbar comes here -->
+    </div>
+    <div id="cont">
+     <div id="main">
+        <form>
+            <label for="">Name</label>
+            <input type="text" required>
+    
+            <label for="">Price</label>
+            <input type="number" required>
+    
+            <label for="">Category</label>
+            <input type="text" name="" id=""  required>
+    
+            <label for="">Image</label>
+            <input type="text" name="" id="" required>
+    
+            <label for="">Description</label>
+            <input type="text" name="" id="" required>
+
+            <label for="">Ratings</label>
+            <input type="number" name="" id="" required>
+    
+            <input type="submit" value="Add Product">
+    
+        </form>
+    </div>
+        <div id="products">
+            <h1>Products</h1>
+            <table>
+                <thead>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Ratings</th>
+                    <th>Remove</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+</body>
+</html>
+<script type="module" src="./scripts/admin-products.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

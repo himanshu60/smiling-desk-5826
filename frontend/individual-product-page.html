@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click & Collect</title>
+    <link rel="shortcut icon" href="./images/supermart-favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/individual-product-page.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+</head>
+<body>
+    <nav>
+        <img id="logo" src="./images/click &collect.png" alt="" />
+        <div id="search-div">
+          <input
+            id="search-inputs"
+            type="text"
+            placeholder="Search for Products"
+          />
+          <button>
+            <img
+              id="search-btn"
+              src="./images/magnifying-glass-search.png"
+              alt=""
+            />
+          </button>
+        </div>
+        <button id="login-btn">Login</button>
+        <p>Become a Seller</p>
+        <p>More</p>
+  
+        <div id="cart-btn" ><img id="cart" src="./images/cart.png" alt="" /> Cart</div>
+      </nav>
+      <!-- profile, orders -->
+      <div id="profile-popup">
+        <p>New costumer? <a href="">Sign Up</a></p>
+        <a href=""><img src="./images/profile-user.png" alt="" /> My Profile</a>
+        <a href=""><img src="./images/star.png" alt="" /> SuperMart Plus Zone</a>
+        <a href=""><img src="./images/courier.png" alt="" /> Orders</a>
+        <a href=""><img src="./images/heart.png" alt="" /> Wishlist</a>
+        <a href=""><img src="./images/gift.png" alt="" /> Rewards</a>
+        <a href=""><img src="./images/wallet.png" alt="" /> Gift Cards</a>
+      </div>
+  
+      <!-- login -->
+      <div id="login-popup">
+        <div>
+          <h2>Login</h2>
+          <p>Get access to your Orders, Wishlist and Recommendations</p>
+        </div>
+        <div>
+          <img src="./images/close.png" alt="" id="login-popup-closebtn" />
+          <form id="login-form">
+            <label>Email</label>
+            <input type="email" id="log-email" required />
+            <label>Password</label>
+            <input type="password" id="log-pass" required />
+            <p>Don't have an account? <a href="">Register</a></p>
+            <input type="submit" value="Login" />
+          </form>
+        </div>
+      </div>
+  
+      <!-- Register -->
+      <div id="register-popup">
+        <div>
+          <h2>Looks like you are new here!</h2>
+          <p>Sign up to get started</p>
+        </div>
+        <div>
+          <img src="./images/close.png" alt="" id="register-popup-closebtn" />
+          <form id="register-form">
+            <label for="">Name</label>
+            <input type="text" required />
+            <label>Email</label>
+            <input type="email" id="reg-email" required />
+            <label for="">Phone</label>
+            <input type="number" required />
+            <label>Password</label>
+            <input type="password" id="reg-pass" required />
+            <p>Already have an account? <a href="">Login</a></p>
+            <input type="submit" value="Sign Up" />
+          </form>
+        </div>
+      </div>
+      <!-- main -->
+    <div id="main">
+        
+    </div>
+
+
+</body>
+</html>
+<script src="./scripts/individual-product-page.js"></script>
+<script src="./scripts/nav.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
