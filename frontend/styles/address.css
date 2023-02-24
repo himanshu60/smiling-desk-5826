@@ -1,0 +1,41 @@
+#main{
+    width: 100%;
+}
+
+#main form{
+    /* width: 100%; */
+    width: 28%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    /* color: white; */
+    /* border: 1px solid white; */
+    border-radius: 8px ;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    /* background-color: rgb(80, 80, 80); */
+}
+
+#main>form>input, #main>form>select{
+    padding: 8px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    /* border: none; */
+    /* background-color: black; */
+    /* color: white; */
+    font-size: large;
+    /* border-bottom: 1px solid black; */
+}
+
+#main>form>input[type="submit"]{
+    background-color: rgb(50, 171, 171);
+    border: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#main>form>input[type="submit"]:hover{
+    background-color: rgb(75, 197, 197);
+    cursor: pointer;
+}
+
+

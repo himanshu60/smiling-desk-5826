@@ -1,0 +1,84 @@
+#cont{
+    display: flex;
+    /* width: 100%; */
+    justify-content: space-evenly;
+    /* border: 1px solid white; */
+    height: 500px;
+}
+#main{
+    width: 30%;
+    /* margin: auto; */
+    margin-top: 10vh;
+    /* border: 1px solid white; */
+}
+
+#main form{
+    /* width: 100%; */
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px ;
+    background-color: rgb(80, 80, 80);
+}
+
+#main>form>input, #main>form>select{
+    padding: 8px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: large;
+}
+
+#main>form>input[type="submit"]{
+    background-color: rgb(50, 171, 171);
+    border: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#main>form>input[type="submit"]:hover{
+    background-color: rgb(75, 197, 197);
+    cursor: pointer;
+}
+
+#products{
+    text-align: center;
+    color: aliceblue;
+    width: 70%;
+}
+
+#products table{
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    box-shadow: rgba(253, 253, 253, 0.2) 0px 2px 8px 0px;
+}
+
+#products th{
+    background-color: aquamarine;
+    color: black;
+}
+
+#products td, #products th{
+    border: 1px solid white;
+    padding: 15px;
+    
+}
+
+#delete-btn{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    background: none;
+    border: none;
+    color: white;
+}
+
+#product-img{
+    width: 100%;
+}
+

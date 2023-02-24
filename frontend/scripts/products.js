@@ -16,6 +16,7 @@ async function getProducts() {
         const res = await fetch(`${api_base_url}/products`);
         const data = await res.json();
         displayProducts(data);
+        console.log(data)
     } catch (error) {
         console.log(error);
     }
@@ -27,7 +28,7 @@ function displayProducts(data) {
     div.innerHTML = null;
 
     data.forEach((el) => {
-
+ 
         const div1 = document.createElement("div");
 
 

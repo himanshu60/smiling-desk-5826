@@ -11,7 +11,7 @@ const register_popup_closebtn = document.getElementById("register-popup-closebtn
 const si_link = document.querySelector("#profile-popup>p>a");
 const register_form = document.getElementById("register-form");
 const login_form = document.getElementById("login-form");
-const searchInput = document.getElementById("search-input");
+const searchInput = document.getElementById("search-inputs");
 const searchBtn = document.getElementById("search-btn");
 const div = document.querySelector("#products");
 const cartBtn = document.getElementById("cart-btn");
@@ -116,7 +116,7 @@ register_form.addEventListener("submit", async (e) => {
   
 
   try {
-    let res = await fetch(`${api_base_url}/user/register`, {
+    let res = await fetch(`${api_base_url}/users/register`, {
       method: "POST",
       body: JSON.stringify(userObj),
       headers: {
@@ -147,13 +147,13 @@ login_form.addEventListener("submit", async (e) => {
 
   const inputs = document.querySelectorAll("#login-form input");
 
-  if(inputs[0].value=="admin@supermart.com" && inputs[1].value=="admin"){
+  if(inputs[0].value=="admin@click.com" && inputs[1].value=="admin"){
     // const path = window.location.origin;
     window.location.href = `Admin-Page/dashboard.html`;
   }
 
   try {
-    let res = await fetch(`${api_base_url}/user/login`, {
+    let res = await fetch(`${api_base_url}/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email: inputs[0].value,
