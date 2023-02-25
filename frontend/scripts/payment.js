@@ -8,5 +8,5 @@ payBtn.addEventListener("click", ()=>{
 })
 
 function fun(){
-    window.location.href = "index.html";
+    window.location.href = "thankU.html";
 }
