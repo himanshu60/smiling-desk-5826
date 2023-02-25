@@ -17,23 +17,26 @@ const div = document.querySelector("#products");
 const cartBtn = document.getElementById("cart-btn");
 const auth_token = localStorage.getItem("token");
 const userloggedin = localStorage.getItem("userloggedin?");
+const deploy_url = "https://tough-hen-underclothes.cyclic.app";
+
+
 
 console.log(userloggedin);
 
 // if(userloggedin){
-  function logout(){
-      const logoutBtn = document.createElement("a");
-      logoutBtn.innerHTML = `<img src="./images/power-on.png" alt=""> Log Out`;
-      logoutBtn.style.visibility = "visible"
-      profile_popup.append(logoutBtn)
-      logoutBtn.addEventListener("click", ()=>{
-        localStorage.removeItem("token")
-        swal("You are now Logged out")
-        localStorage.setItem("token", null)
-        localStorage.setItem("userloggedin?", false);
-        profile_popup.lastElementChild.style.visibility = "hidden";
-      })
-    }
+function logout() {
+  const logoutBtn = document.createElement("a");
+  logoutBtn.innerHTML = `<img src="./images/power-on.png" alt=""> Log Out`;
+  logoutBtn.style.visibility = "visible"
+  profile_popup.append(logoutBtn)
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("token")
+    swal("You are now Logged out")
+    localStorage.setItem("token", null)
+    localStorage.setItem("userloggedin?", false);
+    profile_popup.lastElementChild.style.visibility = "hidden";
+  })
+}
 // } else {
 //    profile_popup.removeChild(profile_popup.lastElement);
 // }
@@ -42,7 +45,7 @@ console.log(userloggedin);
 
 
 
-cartBtn.addEventListener("click", ()=>{
+cartBtn.addEventListener("click", () => {
   window.location.href = "cart.html";
 })
 
@@ -113,10 +116,10 @@ register_form.addEventListener("submit", async (e) => {
     password: userDetails[3],
   };
 
-  
+
 
   try {
-    let res = await fetch(`${api_base_url}/users/register`, {
+    let res = await fetch(`${deploy_url}/users/register`, {
       method: "POST",
       body: JSON.stringify(userObj),
       headers: {
@@ -147,13 +150,13 @@ login_form.addEventListener("submit", async (e) => {
 
   const inputs = document.querySelectorAll("#login-form input");
 
-  if(inputs[0].value=="admin@click.com" && inputs[1].value=="admin"){
+  if (inputs[0].value == "admin@click.com" && inputs[1].value == "admin") {
     // const path = window.location.origin;
     window.location.href = `Admin-Page/dashboard.html`;
   }
 
   try {
-    let res = await fetch(`${api_base_url}/users/login`, {
+    let res = await fetch(`${deploy_url}/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email: inputs[0].value,
@@ -190,24 +193,24 @@ login_form.addEventListener("submit", async (e) => {
 });
 
 //------------ Search Functionality -------------//
-searchBtn.addEventListener("click", async(e)=>{
+searchBtn.addEventListener("click", async (e) => {
   const val = searchInput.value;
-    if(val){
-     window.location.href = await "products.html";
+  if (val) {
+    window.location.href = await "products.html";
   }
 
 
   // searchInput.value = val;
 
   try {
-    const res = await fetch(`${api_base_url}/products/?title=${val}`);
+    const res = await fetch(`${deploy_url}/products/?title=${val}`);
     const data = await res.json();
     console.log(data);
     displayProducts(data);
   } catch (error) {
-    
+
   }
-  
+
 
 })
 

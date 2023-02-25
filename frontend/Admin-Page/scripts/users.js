@@ -4,14 +4,15 @@ const nav = document.getElementById("navbar");
 nav.innerHTML = navBar;
 
 const usersTable = document.querySelector("#users tbody")
-const base_url = "http://localhost:8080"
+const base_url = "http://localhost:8080";
+const deploy_url="https://tough-hen-underclothes.cyclic.app";
 
 
 getUsers();
 
 async function getUsers(){
   try {
-      const res = await fetch(`${base_url}/users`);
+      const res = await fetch(`${deploy_url}/users`);
       const data = await res.json();
       displayUsers(data);
       console.log(data);

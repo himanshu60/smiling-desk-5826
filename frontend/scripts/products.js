@@ -4,16 +4,14 @@ const filterByCategory = document.getElementById("filter-by-category");
 const sortByPrice = document.getElementById("sort-by-price");
 const sortByRatings = document.getElementById("sort-by-ratings");
 const token = localStorage.getItem("token");
-// import { navbar } from "./navbar.js";
-// const nav = document.querySelector("nav");
-// nav.innerHTML = navbar;
-// console.log(navbar);
+const deploy_url = "https://tough-hen-underclothes.cyclic.app";
+
 
 getProducts();
 
 async function getProducts() {
     try {
-        const res = await fetch(`${api_base_url}/products`);
+        const res = await fetch(`${deploy_url}/products`);
         const data = await res.json();
         displayProducts(data);
         console.log(data)
@@ -28,7 +26,7 @@ function displayProducts(data) {
     div.innerHTML = null;
 
     data.forEach((el) => {
- 
+
         const div1 = document.createElement("div");
 
 
@@ -89,7 +87,7 @@ function displayProducts(data) {
 async function addToCartfun(prod) {
 
     try {
-        let res = await fetch(`${api_base_url}/cartproducts`, {
+        let res = await fetch(`${deploy_url}/cartproducts`, {
             method: "POST",
             body: JSON.stringify(prod),
             headers: {
@@ -118,19 +116,19 @@ async function addToCartfun(prod) {
 
 filterByCategory.addEventListener("change", async () => {
     if (sortByPrice.value == "" && filterByCategory.value == "") {
-        const res = await fetch(`${api_base_url}/products`);
+        const res = await fetch(`${deploy_url}/products`);
         const data = await res.json();
         displayProducts(data);
     } else if (sortByPrice.value == "htl" && filterByCategory.value != "") {
-        const res = await fetch(`${api_base_url}/products/?sort=dsc&category=${filterByCategory.value}`);
+        const res = await fetch(`${deploy_url}/products/?sort=dsc&category=${filterByCategory.value}`);
         const data = await res.json();
         displayProducts(data);
     } else if (sortByPrice.value == "lth" && filterByCategory.value != "") {
-        const res = await fetch(`${api_base_url}/products/?sort=asc&category=${filterByCategory.value}`);
+        const res = await fetch(`${deploy_url}/products/?sort=asc&category=${filterByCategory.value}`);
         const data = await res.json();
         displayProducts(data);
     } else if (filterByCategory != "") {
-        const res = await fetch(`${api_base_url}/products/?category=${filterByCategory.value}`);
+        const res = await fetch(`${deploy_url}/products/?category=${filterByCategory.value}`);
         const data = await res.json();
         displayProducts(data);
     }
@@ -140,27 +138,27 @@ filterByCategory.addEventListener("change", async () => {
 
 sortByPrice.addEventListener("change", async () => {
     if (sortByPrice.value == "" && filterByCategory.value == "") {
-        const res = await fetch(`${api_base_url}/products`);
+        const res = await fetch(`${deploy_url}/products`);
         const data = await res.json();
         displayProducts(data);
     } else if (sortByPrice.value == "htl" && filterByCategory.value != "") {
-        const res = await fetch(`${api_base_url}/products/?sort=dsc&category=${filterByCategory.value}`);
+        const res = await fetch(`${deploy_url}/products/?sort=dsc&category=${filterByCategory.value}`);
         const data = await res.json();
         displayProducts(data);
     } else if (sortByPrice.value == "lth" && filterByCategory.value != "") {
-        const res = await fetch(`${api_base_url}/products/?sort=asc&category=${filterByCategory.value}`);
+        const res = await fetch(`${deploy_url}/products/?sort=asc&category=${filterByCategory.value}`);
         const data = await res.json();
         displayProducts(data);
     } else if (sortByPrice.value == "") {
-        const res = await fetch(`${api_base_url}/products`);
+        const res = await fetch(`${deploy_url}/products`);
         const data = await res.json();
         displayProducts(data);
     } else if (sortByPrice.value == "htl") {
-        const res = await fetch(`${api_base_url}/products/?sort=dsc`);
+        const res = await fetch(`${deploy_url}/products/?sort=dsc`);
         const data = await res.json();
         displayProducts(data);
     } else if (sortByPrice.value == "lth") {
-        const res = await fetch(`${api_base_url}/products/?sort=asc`);
+        const res = await fetch(`${deploy_url}/products/?sort=asc`);
         const data = await res.json();
         displayProducts(data);
     }
@@ -170,7 +168,7 @@ sortByRatings.addEventListener("change", async () => {
     const rati = sortByRatings.value;
     if (rati != '') {
         try {
-            const res = await fetch(`${api_base_url}/products`);
+            const res = await fetch(`${deploy_url}/products`);
             const data = await res.json();
             if (rati == "4a") {
                 const data1 = data.filter((el) => {
