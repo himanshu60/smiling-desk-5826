@@ -37,7 +37,7 @@ DELETE /cartproducts/:id - to delete a product from cart
 # Register Page
 ![Register page](https://user-images.githubusercontent.com/65457075/221425735-8d111d63-4da1-4e24-b7cc-906d961df4a6.PNG)
 
-#Login Page
+# Login Page
 ![Login Page](https://user-images.githubusercontent.com/65457075/221425756-bd57277a-f50c-494c-8c24-f0a51a27aaff.PNG)
 
 # Products Page
@@ -47,7 +47,7 @@ DELETE /cartproducts/:id - to delete a product from cart
 ![Individual Product page](https://user-images.githubusercontent.com/65457075/221425842-e61572ea-e112-4f95-a6e7-dc88f12f7b45.PNG)
 
 
-#cart Page
+# cart Page
 ![Cart Page](https://user-images.githubusercontent.com/65457075/221425776-f12ec5af-5b82-4b9f-aae0-287b350bb5f5.PNG)
 
 # FeedBack
