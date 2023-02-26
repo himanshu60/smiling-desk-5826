@@ -1,6 +1,6 @@
 # Click & Collect 
 
-Click & Collect is a flipkart clone. Basically flipkart is an e-commerce store where you can purchase different differnt products with lost cost and get gifts.
+Click & Collect is a flipkart clone. Basically flipkart is an e-commerce store where you can purchase different differnt products with low cost and get gifts.
 
 Deployed Link :- https://startling-starship-84b8ae.netlify.app/
 
