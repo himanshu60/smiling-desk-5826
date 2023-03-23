@@ -31,16 +31,16 @@ GET /cartproducts - to get cart products
 DELETE /cartproducts/:id - to delete a product from cart
 ```
 
-# Home Page
+# Home-Page
 ![Home page](https://user-images.githubusercontent.com/65457075/221425708-1f8d8f79-814d-4fef-ba8f-fc2558b88c01.PNG)
 
-# Register Page
+# Register-Page
 ![Register page](https://user-images.githubusercontent.com/65457075/221425735-8d111d63-4da1-4e24-b7cc-906d961df4a6.PNG)
 
-# Login Page
+# Login-Page
 ![Login Page](https://user-images.githubusercontent.com/65457075/221425756-bd57277a-f50c-494c-8c24-f0a51a27aaff.PNG)
 
-# Products Page
+# Products-Page
 ![Product Page](https://user-images.githubusercontent.com/65457075/221425811-abf4b6cc-362a-42d0-b2b9-7358a9d71735.PNG)
 
 # Individual-Product-Page
