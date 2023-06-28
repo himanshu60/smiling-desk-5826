@@ -136,7 +136,7 @@ h1{
     width: 60%;
 }
 }
-
+/* media query */
 @media screen and (max-width: 555px) {
  
   #cart1{
