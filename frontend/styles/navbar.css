@@ -178,3 +178,9 @@ nav>div {
     background-color: rgb(77, 210, 210);
     color: black;
 }
+
+@media screen and (max-width: 1000px) {
+    #search-div{
+        display: none;
+    }
+  }

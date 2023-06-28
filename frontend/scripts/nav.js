@@ -25,11 +25,11 @@ console.log(userloggedin);
 
 // if(userloggedin){
 function logout() {
-  const logoutBtn = document.createElement("a");
-  logoutBtn.innerHTML = `<img src="./images/power-on.png" alt=""> Log Out`;
-  logoutBtn.style.visibility = "visible"
-  profile_popup.append(logoutBtn)
-  logoutBtn.addEventListener("click", () => {
+  const logoutBtns = document.createElement("a");
+  logoutBtns.innerHTML = `<img src="./images/power-on.png" alt=""> Log Out`;
+  logoutBtns.style.visibility =   "visible"
+  profile_popup.append(logoutBtns)
+  logoutBtns.addEventListener("click", () => {
     localStorage.removeItem("token")
     swal("You are now Logged out")
     localStorage.setItem("token", null)
@@ -139,7 +139,7 @@ register_form.addEventListener("submit", async (e) => {
     }
   } catch (error) {
     console.log(error);
-    swal("Some error occurred");
+    swal("User Login first");
   }
 });
 
@@ -181,7 +181,7 @@ login_form.addEventListener("submit", async (e) => {
     } else {
       console.log(res);
       if (res.status == 404) {
-        swal("User Not found");
+        swal("User Login First");
       } else {
         swal("Wrong Credentials");
       }

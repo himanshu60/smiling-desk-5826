@@ -108,7 +108,7 @@ async function addToCartfun(prod) {
         }
     } catch (error) {
         console.log(error);
-        swal("Some error occurred");
+        swal("Login First");
     }
 
 }
