@@ -7,7 +7,9 @@ const login_popup = document.getElementById("login-popup");
 const log_link = document.querySelector("#register-form a");
 const register_popup = document.getElementById("register-popup");
 const reg_link = document.querySelector("#login-form a");
-const register_popup_closebtn = document.getElementById("register-popup-closebtn");
+const register_popup_closebtn = document.getElementById(
+  "register-popup-closebtn"
+);
 const si_link = document.querySelector("#profile-popup>p>a");
 const register_form = document.getElementById("register-form");
 const login_form = document.getElementById("login-form");
@@ -16,38 +18,41 @@ const searchBtn = document.getElementById("search-btn");
 const div = document.querySelector("#products");
 const cartBtn = document.getElementById("cart-btn");
 const auth_token = localStorage.getItem("token");
-const userloggedin = localStorage.getItem("userloggedin?");
+const userloggedin = JSON.parse(localStorage.getItem("userloggedin?"));
 const deploy_url = "https://tough-hen-underclothes.cyclic.app";
-
-
 
 console.log(userloggedin);
 
-// if(userloggedin){
+if (userloggedin) {
+  logout();
+} else {
+  loginBtn.style.visibility = "visible";
+}
+
 function logout() {
+  let name = localStorage.getItem("name");
+  console.log(name);
+  loginBtn.innerHTML = name;
   const logoutBtns = document.createElement("a");
-  logoutBtns.innerHTML = `<img src="./images/power-on.png" alt=""> Log Out`;
-  logoutBtns.style.visibility =   "visible"
-  profile_popup.append(logoutBtns)
+  // logoutBtns.innerHTML = `<img src="./images/power-on.png" alt=""> Log Out`;
+  logoutBtns.innerHTML = `<img src="./images/power-on.png" alt="">Log Out`;
+  // logoutBtns.style.visibility = "visible";
+  profile_popup.append(logoutBtns);
   logoutBtns.addEventListener("click", () => {
-    localStorage.removeItem("token")
-    swal("You are now Logged out")
-    localStorage.setItem("token", null)
+    loginBtn.innerHTML = "Login";
+
+    localStorage.clear();
+    swal("You are now Logged out");
+    localStorage.setItem("token", null);
     localStorage.setItem("userloggedin?", false);
     profile_popup.lastElementChild.style.visibility = "hidden";
-  })
+    loginBtn.style.visibility = "visible";
+  });
 }
-// } else {
-//    profile_popup.removeChild(profile_popup.lastElement);
-// }
-
-
-
-
 
 cartBtn.addEventListener("click", () => {
   window.location.href = "cart.html";
-})
+});
 
 logo.addEventListener("click", () => {
   window.location.href = "index.html";
@@ -116,8 +121,6 @@ register_form.addEventListener("submit", async (e) => {
     password: userDetails[3],
   };
 
-
-
   try {
     let res = await fetch(`${deploy_url}/users/register`, {
       method: "POST",
@@ -168,6 +171,8 @@ login_form.addEventListener("submit", async (e) => {
     });
     const data = await res.json();
     localStorage.setItem("token", data.token);
+    localStorage.setItem("name", data.name);
+    localStorage.setItem("id", data.userid);
     localStorage.setItem("userloggedin?", true);
     console.log(data);
     if (res.ok) {
@@ -199,7 +204,6 @@ searchBtn.addEventListener("click", async (e) => {
     window.location.href = await "products.html";
   }
 
-
   // searchInput.value = val;
 
   try {
@@ -207,10 +211,5 @@ searchBtn.addEventListener("click", async (e) => {
     const data = await res.json();
     console.log(data);
     displayProducts(data);
-  } catch (error) {
-
-  }
-
-
-})
-
+  } catch (error) {}
+});

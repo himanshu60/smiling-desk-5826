@@ -1,85 +1,79 @@
-
-#category{
-    display: grid;
-    grid-template-columns: repeat(9,1fr);
-    /* justify-content: space-evenly; */
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+#category {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  /* justify-content: space-evenly; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-#category>div{
-    width: 35%;
-    padding-left: 34px;
-    text-align: center;
+#category > div {
+  width: 35%;
+  padding-left: 34px;
+  text-align: center;
 }
 
-#category>div img{
-    width: 100%;
-    margin: 0;
-    padding: 0;
+#category > div img {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-#slider{
-    margin: 10px;
+#slider {
+  margin: 10px;
 }
 
-#slider>img{
-    width: 100%;
+#slider > img {
+  width: 100%;
 }
 
-#top-offers{
-    display: flex;
-    justify-content: space-evenly;
+#top-offers {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-
-
-#top-offers>div{
-    width: 23%;
-    margin: 10px 0px;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+#top-offers > div {
+  width: 23%;
+  margin: 10px 0px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-
-#top-offers>div>img{
-    width: 98%;
-    margin: auto;
+#top-offers > div > img {
+  width: 98%;
+  margin: auto;
 }
 
-#mid-sec{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+#mid-sec {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-#mid-sec img{
-    width: 100%;
+#mid-sec img {
+  width: 100%;
 }
 
-#b-offers{
-    width: 100%;
+#b-offers {
+  width: 100%;
 }
 
-#b-offers>img{
-    width: 100%;
+#b-offers > img {
+  width: 100%;
 }
-
 
 @media screen and (max-width: 1000px) {
-    #category{
-        display: grid;
-        grid-template-columns: repeat(5,1fr);
-        /* justify-content: space-evenly; */
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    }
+  #category {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* justify-content: space-evenly; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
+}
 
-  @media screen and (max-width: 555px) {
-    #category{
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        /* justify-content: space-evenly; */
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    }
+@media screen and (max-width: 555px) {
+  #category {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* justify-content: space-evenly; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
-
+}

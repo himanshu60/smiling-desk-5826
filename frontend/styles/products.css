@@ -1,102 +1,98 @@
-#prod{
-    display: flex;
-    margin: auto;
-    padding: 15px;
-    justify-content: space-evenly;
+#prod {
+  display: flex;
+  margin: auto;
+  padding: 15px;
+  justify-content: space-evenly;
 }
 
-#filters{
-    width: 25%;
-    height: 55vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+#filters {
+  width: 25%;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-#filters>span{
-    border-bottom: 0.5px solid grey;
-    padding: 10px;
+#filters > span {
+  border-bottom: 0.5px solid grey;
+  padding: 10px;
 }
 
-
-#products{
-    display: flex;
-    flex-direction: column;
-    width: 70%;
+#products {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
 }
 
-#products>div{
-    display: flex;
-    border-bottom: 0.5px solid grey;
-    width: 100%;
-    justify-content: space-evenly;
+#products > div {
+  display: flex;
+  border-bottom: 0.5px solid grey;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
-#products>div>div:nth-child(1){
+#products > div > div:nth-child(1) {
   width: 30%;
   margin: 10px;
 }
 
-#products>div>:nth-child(2){
+#products > div > :nth-child(2) {
   width: 50%;
 }
 
-#products>div>div>img{
+#products > div > div > img {
   width: 200px;
-  height: auto ;
+  height: auto;
 }
 
-#products>div>div>p{
-    color: rgb(102, 102, 102);
-    text-overflow:ellipsis;
-    overflow:hidden;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    white-space: normal;
- }
-
- 
-#products>div>div>h2{
-    font-weight: 530;
-    text-overflow:ellipsis;
-    overflow:hidden;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    white-space: normal;
-    
-  }
-  
-  #products>div>div>button{
-    width: 100%;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    color: black;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  
-  #products>div>div>button:hover{
-    box-shadow: none;
-    color: rgb(98, 205, 205);
-  }
-  
-  #products>div>h3{
-    font-weight: 530;
+#products > div > div > p {
+  color: rgb(102, 102, 102);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
 
-
-#products span{
-  display: flex; 
- background-color: rgb(129, 228, 228);
- width: fit-content;
- padding: 1%;
- border-radius: 3px;
+#products > div > div > h2 {
+  font-weight: 530;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
 
-select{
+#products > div > div > button {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#products > div > div > button:hover {
+  box-shadow: none;
+  color: rgb(98, 205, 205);
+}
+
+#products > div > h3 {
+  font-weight: 530;
+}
+
+#products span {
+  display: flex;
+  background-color: rgb(129, 228, 228);
+  width: fit-content;
+  padding: 1%;
+  border-radius: 3px;
+}
+
+select {
   width: 70%;
   margin: auto;
   padding: 5px;
@@ -104,30 +100,49 @@ select{
   text-align: center;
 }
 
+/* media queries */
 
-/* media query */
-@media screen and (max-width: 1000px) {
-  #search-div{
-      display: none;
+@media screen and (max-width: 800px) {
+  #search-div {
+    display: none;
   }
-  #filters{
+  #filters {
     width: 100%;
     height: 20vh;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
   }
-  #prod{
+  #prod {
     display: block;
     margin: auto;
     padding: 15px;
     justify-content: space-evenly;
-}
-#products>div{
-  display: block;
-  border-bottom: 0.5px solid grey;
-  width: 100%;
-  justify-content: space-evenly;
-}
+  }
+  #products > div {
+    display: block;
+    border-bottom: 0.5px solid grey;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  #products > div > div:nth-child(1) {
+    width: 100%;
+    margin: 10px;
+  }
+  #products > div > :nth-child(2) {
+    width: 100%;
+  }
 }
 
+@media screen and (max-width: 555px) {
+  #prod {
+    display: block;
+    margin: auto;
+    padding: 15px;
+    justify-content: space-evenly;
+  }
+  #products > div > div > button {
+    padding: 8px 20px;
+    margin: 6px auto;
+  }
+}
