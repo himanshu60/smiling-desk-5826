@@ -2,7 +2,7 @@
 // Auto-detects local development vs. production so the same code works in both.
 // At deploy time (Phase 15), set PROD_API_URL to the live backend URL.
 (function () {
-  var PROD_API_URL = "https://smiling-desk-backend.onrender.com"; // TODO: set real deploy URL
+  var PROD_API_URL = "https://smiling-desk-5826.onrender.com"; // live Render backend
   var host = window.location.hostname;
   var isLocal =
     host === "localhost" || host === "127.0.0.1" || host === "" /* file:// */;
