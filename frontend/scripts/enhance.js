@@ -99,11 +99,66 @@
     mo.observe(document.body, { childList: true, subtree: true });
   }
 
+  /* ---- Back button (every page except the home page) ---- */
+  function mountBackButton() {
+    var path = window.location.pathname;
+    var isHome = path === "/" || /(^|\/)index\.html$/.test(path);
+    if (isHome) return;
+    var btn = document.createElement("button");
+    btn.id = "cc-back";
+    btn.setAttribute("aria-label", "Go back");
+    btn.innerHTML =
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Back';
+    btn.addEventListener("click", function () {
+      if (window.history.length > 1) window.history.back();
+      else window.location.href = "index.html";
+    });
+    document.body.appendChild(btn);
+  }
+
+  /* ---- Modal backdrop + close on outside-click / Escape ---- */
+  function mountModalBackdrop() {
+    var popups = [
+      document.getElementById("login-popup"),
+      document.getElementById("register-popup"),
+    ].filter(Boolean);
+    if (!popups.length) return;
+
+    var backdrop = document.createElement("div");
+    backdrop.id = "cc-backdrop";
+    document.body.appendChild(backdrop);
+
+    function anyVisible() {
+      return popups.some(function (p) {
+        return getComputedStyle(p).visibility !== "hidden";
+      });
+    }
+    function sync() {
+      backdrop.classList.toggle("cc-show", anyVisible());
+    }
+    function hideAll() {
+      popups.forEach(function (p) { p.style.visibility = "hidden"; });
+      sync();
+    }
+
+    var mo = new MutationObserver(sync);
+    popups.forEach(function (p) {
+      mo.observe(p, { attributes: true, attributeFilter: ["style"] });
+    });
+    backdrop.addEventListener("click", hideAll);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") hideAll();
+    });
+    sync();
+  }
+
   onReady(function () {
     mountScrollTop();
     fadeImages(document);
     attachRipple();
     revealOnScroll();
     watchDynamicImages();
+    mountBackButton();
+    mountModalBackdrop();
   });
 })();

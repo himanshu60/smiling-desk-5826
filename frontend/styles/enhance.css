@@ -195,6 +195,158 @@ img[data-cc-fade].cc-loaded { opacity: 1; }
 .cc-reveal { opacity: 0; transform: translateY(22px); }
 .cc-reveal.cc-in { opacity: 1; transform: translateY(0); transition: all 0.6s var(--cc-ease); }
 
+/* ---------- Sticky header (force across all pages) ---------- */
+nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+
+/* ---------- Cursor affordances ---------- */
+button,
+a,
+select,
+#login-btn,
+#cart-btn,
+#cart-btn *,
+#logo,
+#products > div,
+#category > div,
+input[type="submit"],
+[id$="closebtn"],
+.cc-clickable {
+  cursor: pointer;
+}
+input:not([type="submit"]),
+textarea {
+  cursor: text;
+}
+
+/* ---------- Auth modals: modern look + correct stacking above navbar ---------- */
+#profile-popup {
+  z-index: 1001 !important;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#login-popup,
+#register-popup {
+  z-index: 1100 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28) !important;
+  overflow: hidden;
+}
+#login-popup > div:nth-child(1),
+#register-popup > div:nth-child(1) {
+  background: linear-gradient(160deg, var(--cc-blue), #1a4fd0) !important;
+}
+#login-form input:not([type="submit"]),
+#register-form input:not([type="submit"]) {
+  border: 1.5px solid #dfe1e6 !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  font-size: 0.95rem;
+}
+#login-form input:focus,
+#register-form input:focus {
+  outline: none;
+  border-color: var(--cc-blue) !important;
+  box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.15);
+}
+#login-form input[type="submit"],
+#register-form input[type="submit"] {
+  background: var(--cc-cta) !important;
+  color: #fff !important;
+  padding: 12px !important;
+  border-radius: 8px !important;
+  font-weight: 600;
+  margin-top: 6px;
+}
+#login-form input[type="submit"]:hover,
+#register-form input[type="submit"]:hover {
+  background: #e85d18 !important;
+  color: #fff !important;
+  box-shadow: var(--cc-shadow-md) !important;
+}
+#login-form a,
+#register-form a {
+  color: var(--cc-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+#login-popup > div:nth-child(2) > img,
+#register-popup > div:nth-child(2) > img {
+  width: 16px !important;
+  opacity: 0.55;
+}
+#login-popup > div:nth-child(2) > img:hover,
+#register-popup > div:nth-child(2) > img:hover {
+  opacity: 1;
+}
+
+/* ---------- Modal backdrop (element added by enhance.js) ---------- */
+#cc-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s var(--cc-ease);
+}
+#cc-backdrop.cc-show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---------- SweetAlert (toast/dialog) polish ---------- */
+.swal-modal {
+  border-radius: 14px !important;
+}
+.swal-title {
+  font-size: 1.25rem !important;
+}
+.swal-text {
+  color: #555 !important;
+  text-align: center;
+}
+.swal-button {
+  background: var(--cc-blue) !important;
+  border-radius: 8px !important;
+  padding: 10px 22px !important;
+  box-shadow: none !important;
+}
+.swal-button:hover {
+  background: var(--cc-blue-dark) !important;
+}
+.swal-button:focus {
+  box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.25) !important;
+}
+
+/* ---------- Back button (element added by enhance.js) ---------- */
+#cc-back {
+  position: fixed;
+  left: 22px;
+  bottom: 22px;
+  height: 42px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 24px;
+  background: #fff;
+  color: var(--cc-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--cc-shadow-lg);
+  z-index: 50;
+}
+#cc-back:hover {
+  background: var(--cc-blue);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
 /* Respect users who prefer no motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; scroll-behavior: auto !important; }

@@ -130,9 +130,15 @@ register_form.addEventListener("submit", async (e) => {
     });
     const data = await res.json();
     if (res.ok) {
+      // Auto-close register, switch to the login modal and prefill the email.
+      register_form.reset();
+      register_popup.style.visibility = "hidden";
+      const loginInputs = document.querySelectorAll("#login-form input");
+      if (loginInputs[0]) loginInputs[0].value = userObj.email;
+      login_popup.style.visibility = "visible";
       swal({
-        title: "Account has been created.",
-        text: "You can login now.",
+        title: "Account created!",
+        text: "Please log in to continue.",
         icon: "success",
         button: "OK",
       });
@@ -171,6 +177,9 @@ login_form.addEventListener("submit", async (e) => {
       localStorage.setItem("name", data.name);
       localStorage.setItem("id", data.userid);
       localStorage.setItem("userloggedin?", true);
+      // Auto-close the login modal.
+      login_form.reset();
+      login_popup.style.visibility = "hidden";
       swal({
         title: "Login Successful",
         text: "Welcome " + data.name,
@@ -188,18 +197,26 @@ login_form.addEventListener("submit", async (e) => {
 });
 
 //------------ Search Functionality -------------//
-searchBtn.addEventListener("click", async (e) => {
-  const val = searchInput.value;
-  if (val) {
-    window.location.href = await "products.html";
-  }
+// Navigate to the products page carrying the search term as a query param.
+// products.js reads ?search= and fetches matching products.
+function doSearch() {
+  const val = (searchInput && searchInput.value ? searchInput.value : "").trim();
+  if (!val) return;
+  window.location.href = `products.html?search=${encodeURIComponent(val)}`;
+}
 
-  // searchInput.value = val;
-
-  try {
-    const res = await fetch(`${deploy_url}/products/?title=${val}`);
-    const data = await res.json();
-    console.log(data);
-    displayProducts(data);
-  } catch (error) {}
-});
+if (searchBtn) {
+  const searchButtonEl = searchBtn.closest("button") || searchBtn;
+  searchButtonEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    doSearch();
+  });
+}
+if (searchInput) {
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      doSearch();
+    }
+  });
+}

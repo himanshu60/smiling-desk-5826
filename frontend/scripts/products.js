@@ -2,10 +2,45 @@ const div = document.querySelector("#products");
 const filterByCategory = document.getElementById("filter-by-category");
 const sortByPrice = document.getElementById("sort-by-price");
 const sortByRatings = document.getElementById("sort-by-ratings");
+const searchInputEl = document.getElementById("search-inputs");
 const token = localStorage.getItem("token");
 // deploy_url is provided globally by config.js
 
-getProducts();
+// On load, honour ?search= / ?category= from the URL (used by the navbar search
+// and category links); otherwise show everything.
+initProducts();
+
+async function initProducts() {
+  const params = new URLSearchParams(window.location.search);
+  const search = params.get("search");
+  const category = params.get("category");
+
+  if (search) {
+    if (searchInputEl) searchInputEl.value = search;
+    await fetchAndDisplay(`${deploy_url}/products?title=${encodeURIComponent(search)}`);
+  } else if (category) {
+    if (filterByCategory) filterByCategory.value = category;
+    await fetchAndDisplay(`${deploy_url}/products?category=${encodeURIComponent(category)}`);
+  } else {
+    await getProducts();
+  }
+}
+
+async function fetchAndDisplay(url) {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    displayProducts(data);
+    if (Array.isArray(data) && data.length === 0) showEmptyState();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function showEmptyState() {
+  div.innerHTML =
+    '<p style="padding:40px;text-align:center;color:#878787;font-size:1.1rem;">No products found. Try a different search or filter.</p>';
+}
 
 async function getProducts() {
   try {
