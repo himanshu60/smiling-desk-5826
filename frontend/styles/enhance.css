@@ -212,8 +212,101 @@ img[data-cc-fade].cc-loaded { opacity: 1; }
   font-size: 1.9rem;
   line-height: 1;
 }
-#slider > img,
-#b-offers > img { border-radius: var(--cc-radius); display: block; }
+/* ---------- Home promo/banner image sizing (stop them blowing up) ---------- */
+#slider { margin: 12px 5%; }
+#slider #banner-img {
+  width: 100%;
+  height: clamp(140px, 20vw, 240px);
+  object-fit: cover;
+  border-radius: var(--cc-radius);
+  display: block;
+}
+#b-offers { padding: 0 5%; }
+#b-offers > img {
+  width: 100%;
+  height: clamp(150px, 22vw, 280px);
+  object-fit: cover;
+  border-radius: var(--cc-radius);
+  display: block;
+}
+#top-offers { padding: 12px 5%; gap: 14px; }
+#top-offers > div { width: 23%; }
+#top-offers > div > img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--cc-radius);
+  display: block;
+}
+#mid-sec { padding: 0 5% 12px; }
+#mid-sec img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: var(--cc-radius);
+  display: block;
+}
+
+/* ---------- Navbar polish ---------- */
+nav {
+  align-items: center !important;
+  gap: 14px;
+  padding: 8px 5% !important;
+}
+#logo {
+  width: auto !important;
+  height: 46px !important;
+  object-fit: contain;
+}
+#search-div {
+  flex: 1;
+  max-width: 560px;
+  width: auto !important;
+  border-radius: 8px;
+  align-items: center;
+}
+#login-btn {
+  font-weight: 600;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+nav > p {
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+  margin: auto 0 !important;
+}
+#cart-btn {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+  width: auto !important;
+}
+#cart {
+  width: 26px !important;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+  #top-offers > div { width: 48%; }
+  #top-offers { flex-wrap: wrap; }
+}
+
+/* Keep search usable on tablet/mobile (was hidden below 1200px) */
+@media (max-width: 1200px) {
+  #search-div { display: flex !important; }
+}
+@media (max-width: 768px) {
+  nav { flex-wrap: wrap; }
+  #search-div {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+}
 
 /* ---------- Sticky header (force across all pages) ---------- */
 nav {

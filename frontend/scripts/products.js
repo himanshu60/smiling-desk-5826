@@ -53,6 +53,22 @@ async function getProducts() {
   }
 }
 
+// Debounced live search: filter results as the user types (400ms after they stop).
+let searchTimer;
+if (searchInputEl) {
+  searchInputEl.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    const q = searchInputEl.value.trim();
+    searchTimer = setTimeout(() => {
+      if (q) {
+        fetchAndDisplay(`${deploy_url}/products?title=${encodeURIComponent(q)}`);
+      } else {
+        getProducts();
+      }
+    }, 400);
+  });
+}
+
 function displayProducts(data) {
   div.innerHTML = null;
 

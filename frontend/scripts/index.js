@@ -10,19 +10,27 @@ const PALETTE = [
   ["#f9a825", "#f57f17"],
 ];
 
+// Escape characters that are invalid inside SVG/XML text (e.g. & < >).
+function esc(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 // Build a gradient SVG placeholder with a centered label, returned as a data URI.
 function placeholder(w, h, label, colors) {
   const [c1, c2] = colors;
   const fontSize = Math.max(16, Math.round(Math.min(w, h) / 9));
   const svg =
-    `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'>` +
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 ${w} ${h}' preserveAspectRatio='xMidYMid slice'>` +
     `<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>` +
     `<stop offset='0' stop-color='${c1}'/><stop offset='1' stop-color='${c2}'/>` +
     `</linearGradient></defs>` +
     `<rect width='100%' height='100%' fill='url(#g)'/>` +
     `<text x='50%' y='50%' fill='#ffffff' font-family='Verdana,Arial,sans-serif' ` +
     `font-size='${fontSize}' font-weight='700' text-anchor='middle' dominant-baseline='middle'>` +
-    `${label}</text></svg>`;
+    `${esc(label)}</text></svg>`;
   return "data:image/svg+xml," + encodeURIComponent(svg);
 }
 

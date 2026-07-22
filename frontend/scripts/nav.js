@@ -72,6 +72,10 @@ profile_popup.addEventListener("mouseout", () => {
 });
 
 loginBtn.addEventListener("click", () => {
+  // If already logged in, the button shows the user's name — don't open login.
+  if (JSON.parse(localStorage.getItem("userloggedin?"))) return;
+  // Always show the LOGIN modal first (never the register modal).
+  register_popup.style.visibility = "hidden";
   login_popup.style.visibility = "visible";
 });
 
