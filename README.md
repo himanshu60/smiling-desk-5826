@@ -1,54 +1,144 @@
-# Click & Collect 
+# Click & Collect
 
-Click & Collect is a flipkart clone. Basically flipkart is an e-commerce store where you can purchase different differnt products with low cost and get gifts.
+**Click & Collect** is a full-stack e-commerce web application where users can browse
+products, search and filter them, register/login, and manage a shopping cart. It's a
+learning project built with a Node.js/Express/MongoDB backend and a Bootstrap 5 frontend.
 
-Deployed Link :- https://startling-starship-84b8ae.netlify.app/
+🔗 **Live demo:** https://clickcollect-shop.onrender.com
 
+> Single-service deployment: the Express server also serves the static frontend, so
+> the API and the site share one URL (no CORS needed).
 
+---
 
-# Tech Stack
+## Tech Stack
 
-• Frontend: HTML | CSS | JavaScript | Bootstrap
+**Frontend**
+- HTML5, CSS3, JavaScript (ES6)
+- Bootstrap 5 + Bootstrap Icons
+- Custom design system (`styles/theme.css`) + shared components (`scripts/components.js`)
 
-• Backend: Node.js | Express.js | MongoDB
+**Backend**
+- Node.js, Express.js
+- MongoDB + Mongoose
+- JWT authentication, bcrypt password hashing
+- helmet, express-rate-limit, express-mongo-sanitize, compression, cors, dotenv
 
-→ Node Modules: mongoose.js | bcrypt | cors | dotenv | jsonwebtoken | nodemon
+---
 
-# Site Map for Project
-<img width="762" alt="flow click   collect" src="https://user-images.githubusercontent.com/65457075/221424314-284747f8-49f4-4b1d-bf6b-b2f6cf13306c.png">
+## Features
 
-# API end points
-```POST /users/register - to register
-POST /users/login - to login
-GET /products - to get products data
-GET /products/?category=exampleCategory - to get products category wise 
-GET /products/?title=exampleTitle - to search products by title
-GET /products/?sort=asc - to get sorted products in ascending order
-GET /products/?sort=dsc - to get sorted products in descending order
-POST /products/add - to add products
-POST /cartproducts - to add products to cart
-GET /cartproducts - to get cart products
-DELETE /cartproducts/:id - to delete a product from cart
+- **Auth** — register, login (JWT, 7-day expiry), logout; passwords hashed with bcrypt.
+- **Products** — listing, search by title (debounced live search), category filter,
+  sort by price, filter by rating / price range / stock, product detail page.
+- **Cart** — add/remove items, update quantity, live cart badge; each cart is scoped to
+  the logged-in user (no cross-user access).
+- **UI/UX** — sticky navbar, carousel hero, modern product cards (discount badge, rating,
+  wishlist, stock status), sticky filter sidebar (desktop) / filter drawer (mobile),
+  skeleton loading, toasts, empty states, scroll-to-top, fully responsive.
+- **Extra pages** — Become a Seller, and a shared info page for More-menu items
+  (Notifications, Customer Care, Orders, Wishlist, Gift Cards, Help Center).
+
+---
+
+## API Endpoints
+
+All responses are JSON.
+
+```
+POST   /users/register          Register a new user
+POST   /users/login             Login, returns { token, name, userid }
+
+GET    /products                All products
+GET    /products?category=X     Filter by category
+GET    /products?title=X        Search by title (case-insensitive)
+GET    /products?sort=asc|dsc   Sort by price (composes with category)
+POST   /products/add            Add a product
+
+POST   /cartproducts            Add to cart            (auth required)
+GET    /cartproducts/:id        Get the logged-in user's cart (auth; :id ignored, uses token)
+POST   /cartproducts/qtn/:id    Update item quantity   (auth required)
+DELETE /cartproducts/:id        Remove a cart item     (auth required)
 ```
 
-# Home-Page
-![Home page](https://user-images.githubusercontent.com/65457075/221425708-1f8d8f79-814d-4fef-ba8f-fc2558b88c01.PNG)
+Protected routes expect the JWT in the `Authorization` header (raw token or `Bearer <token>`).
 
-# Register-Page
-![Register page](https://user-images.githubusercontent.com/65457075/221425735-8d111d63-4da1-4e24-b7cc-906d961df4a6.PNG)
+---
 
-# Login-Page
-![Login Page](https://user-images.githubusercontent.com/65457075/221425756-bd57277a-f50c-494c-8c24-f0a51a27aaff.PNG)
+## Local Setup
 
-# Products-Page
-![Product Page](https://user-images.githubusercontent.com/65457075/221425811-abf4b6cc-362a-42d0-b2b9-7358a9d71735.PNG)
+### 1. Backend
+```bash
+cd backend
+cp .env.example .env      # then fill in real values
+npm install
+npm run dev               # nodemon, or `npm start`
+```
 
-# Individual-Product-Page
-![Individual Product page](https://user-images.githubusercontent.com/65457075/221425842-e61572ea-e112-4f95-a6e7-dc88f12f7b45.PNG)
+`.env` variables:
+```
+PORT=8080
+mongoUrl=<your MongoDB Atlas connection string>
+key=<your JWT secret>
+# optional: CLIENT_ORIGINS=https://your-frontend-url (defaults to * / same-origin)
+```
 
+The server serves the frontend from `../frontend`, so once it's running, open
+`http://localhost:8080` (or the port you set) to view the full site.
 
-# cart Page
-![Cart Page](https://user-images.githubusercontent.com/65457075/221425776-f12ec5af-5b82-4b9f-aae0-287b350bb5f5.PNG)
+### 2. Frontend only (optional)
+Any static server works for the frontend on its own:
+```bash
+cd frontend
+python3 -m http.server 5500
+```
+`scripts/config.js` auto-detects localhost and points the API at `http://localhost:5001`
+(adjust if your backend runs on a different port).
 
-# FeedBack
-If You want to give any feedback connect with me on- baliyanh10@gmail.com
+---
+
+## Project Structure
+
+```
+backend/
+  index.js                 app bootstrap, middleware, static frontend, routes
+  config/db.js             Mongoose connection
+  middlewares/auth.js      JWT verification
+  models/                  user, product, cart.product schemas
+  routes/                  user, products, cart routes
+frontend/
+  index.html               home page
+  products.html            product filter page
+  become-seller.html       seller landing page
+  info.html                shared placeholder page (More menu / footer links)
+  cart.html, individual-product-page.html, address.html, payment.html, thankU.html
+  styles/theme.css         design system
+  scripts/
+    config.js              API base URL
+    components.js          navbar, footer, auth modal, toasts, product card
+    index.js               home page logic
+    products.js            filter page logic
+```
+
+---
+
+## Deployment (Render — single service)
+
+1. Create a **Web Service** from this repo.
+2. **Root Directory:** *(blank)* — **Build:** `cd backend && npm install` — **Start:** `cd backend && npm start`
+3. Env vars: `mongoUrl`, `key` (Render injects `PORT`).
+4. In MongoDB Atlas → Network Access, allow `0.0.0.0/0`.
+5. The single service serves both the API and the frontend at one URL.
+
+---
+
+## Security
+
+- Passwords hashed with bcrypt; JWTs signed with a secret and expiring after 7 days.
+- `helmet` security headers, `express-rate-limit` (stricter on auth routes),
+  `express-mongo-sanitize` (NoSQL-injection protection), input validation.
+- Cart access is scoped to the authenticated user; errors never leak stack traces.
+
+---
+
+_Built as a learning project. Product data is for demonstration only._
