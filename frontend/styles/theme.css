@@ -37,6 +37,10 @@ a { text-decoration: none; }
 img { max-width: 100%; }
 
 /* ---------------- Navbar ---------------- */
+/* The navbar is injected into #app-nav. `display:contents` removes that wrapper's
+   box so the sticky navbar's containing block becomes <body> — otherwise sticky
+   would be trapped inside the wrapper (its own height) and scroll away. */
+#app-nav { display: contents; }
 .cc-navbar {
   background: var(--cc-blue);
   box-shadow: var(--cc-shadow-sm);
