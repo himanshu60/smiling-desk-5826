@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const compression = require("compression");
+const path = require("path");
 
 const { userRouter } = require("./routes/user.route");
 const { connection } = require("./config/db");
@@ -15,7 +16,10 @@ const { auth } = require("./middlewares/auth");
 const { cartProductsRouter } = require("./routes/cart.products.route");
 
 // ---------- Security & core middlewares ----------
-app.use(helmet());
+// CSP is disabled because this server also serves the static frontend, which
+// loads third-party CDNs (SweetAlert, Bootstrap, jQuery) and remote images.
+// All other helmet protections stay on.
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(compression()); // gzip responses to cut payload size
 
 // Restrict CORS to configured origins if provided, otherwise allow all
@@ -56,11 +60,13 @@ app.use("/users", authLimiter, userRouter);
 app.use("/products", productRouter);
 app.use("/cartproducts", auth, cartProductsRouter);
 
-app.get("/", (req, res) => {
-  res.send("Click & Collect");
-});
+// ---------- Serve the static frontend from the same origin ----------
+// API routes above are matched first; everything else falls through to the
+// frontend files (index.html at "/", plus css/js/images).
+const frontendDir = path.join(__dirname, "..", "frontend");
+app.use(express.static(frontendDir));
 
-// JSON 404 for unknown API paths
+// JSON 404 for unknown API paths (won't affect real frontend files above)
 app.use((req, res) => {
   res.status(404).json({ msg: "Invalid end point" });
 });
