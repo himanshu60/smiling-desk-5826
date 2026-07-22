@@ -195,6 +195,26 @@ img[data-cc-fade].cc-loaded { opacity: 1; }
 .cc-reveal { opacity: 0; transform: translateY(22px); }
 .cc-reveal.cc-in { opacity: 1; transform: translateY(0); transition: all 0.6s var(--cc-ease); }
 
+/* ---------- Home category tiles (emoji, self-branded) ---------- */
+#category > div {
+  padding: 12px 4px !important;
+  width: auto !important;
+}
+#category p {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--cc-ink);
+  text-align: center;
+  line-height: 1.6;
+}
+#category .cat-ico {
+  font-size: 1.9rem;
+  line-height: 1;
+}
+#slider > img,
+#b-offers > img { border-radius: var(--cc-radius); display: block; }
+
 /* ---------- Sticky header (force across all pages) ---------- */
 nav {
   position: sticky !important;
