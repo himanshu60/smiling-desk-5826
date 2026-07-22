@@ -18,6 +18,7 @@ function displayProducts(...data) {
 
     const image = document.createElement("img");
     image.setAttribute("src", el.image);
+    image.setAttribute("alt", el.name);
     div2.append(image);
 
     const addToCartBtn = document.createElement("button");
@@ -62,16 +63,27 @@ function displayProducts(...data) {
 
 
 async function addToCartfun(prod) {
+  // Send only the fields the cart needs — never the product's own _id/__v,
+  // and always include a quantity (the backend schema requires it).
+  const cartItem = {
+    name: prod.name,
+    price: prod.price,
+    category: prod.category,
+    image: prod.image,
+    description: prod.description,
+    quantity: 1,
+  };
 
   try {
     let res = await fetch(`${deploy_url}/cartproducts`, {
       method: "POST",
-      body: JSON.stringify(prod),
+      body: JSON.stringify(cartItem),
       headers: {
         "Content-Type": "application/json",
-        Authorization: token
+        Authorization: token,
       },
     });
+    const data = await res.json();
     if (res.ok) {
       swal({
         title: "Product has been Added.",
@@ -80,12 +92,10 @@ async function addToCartfun(prod) {
         button: "OK",
       });
     } else {
-      console.log(res);
-      swal(res.json());
+      swal(data.msg || "Could not add to cart");
     }
   } catch (error) {
     console.log(error);
     swal("Some error occurred");
   }
-
 }

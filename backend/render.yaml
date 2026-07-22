@@ -1,0 +1,19 @@
+# Render blueprint for the Click & Collect backend.
+# In Render: New + > Blueprint, point at this repo. Or create a Web Service
+# manually with Root Directory = backend, Build = npm install, Start = npm start.
+services:
+  - type: web
+    name: smiling-desk-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      # Render injects PORT automatically — do not set it.
+      - key: mongoUrl
+        sync: false # set in the Render dashboard (secret)
+      - key: key
+        sync: false # set in the Render dashboard (secret)
+      - key: CLIENT_ORIGINS
+        value: https://startling-starship-84b8ae.netlify.app

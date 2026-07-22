@@ -1,4 +1,3 @@
-const api_base_url = "http://localhost:8080";
 const logo = document.getElementById("logo");
 const loginBtn = document.getElementById("login-btn");
 const profile_popup = document.getElementById("profile-popup");
@@ -19,7 +18,7 @@ const div = document.querySelector("#products");
 const cartBtn = document.getElementById("cart-btn");
 const auth_token = localStorage.getItem("token");
 const userloggedin = JSON.parse(localStorage.getItem("userloggedin?"));
-const deploy_url = "https://tough-hen-underclothes.cyclic.app";
+// deploy_url is provided globally by config.js
 
 console.log(userloggedin);
 
@@ -129,6 +128,7 @@ register_form.addEventListener("submit", async (e) => {
         "Content-Type": "application/json",
       },
     });
+    const data = await res.json();
     if (res.ok) {
       swal({
         title: "Account has been created.",
@@ -137,12 +137,11 @@ register_form.addEventListener("submit", async (e) => {
         button: "OK",
       });
     } else {
-      console.log(res);
-      swal("Internal server error");
+      swal(data.msg || "Registration failed. Please try again.");
     }
   } catch (error) {
     console.log(error);
-    swal("User Login first");
+    swal("Something went wrong. Please try again.");
   }
 });
 
@@ -152,11 +151,6 @@ login_form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const inputs = document.querySelectorAll("#login-form input");
-
-  if (inputs[0].value == "admin@click.com" && inputs[1].value == "admin") {
-    // const path = window.location.origin;
-    window.location.href = `Admin-Page/dashboard.html`;
-  }
 
   try {
     let res = await fetch(`${deploy_url}/users/login`, {
@@ -170,30 +164,26 @@ login_form.addEventListener("submit", async (e) => {
       },
     });
     const data = await res.json();
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("name", data.name);
-    localStorage.setItem("id", data.userid);
-    localStorage.setItem("userloggedin?", true);
-    console.log(data);
+
     if (res.ok) {
+      // Only persist the session after a confirmed successful login.
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("name", data.name);
+      localStorage.setItem("id", data.userid);
+      localStorage.setItem("userloggedin?", true);
       swal({
         title: "Login Successful",
-        text: "Welcome",
+        text: "Welcome " + data.name,
         icon: "success",
         button: "OK",
       });
       logout();
     } else {
-      console.log(res);
-      if (res.status == 404) {
-        swal("User Login First");
-      } else {
-        swal("Wrong Credentials");
-      }
+      swal(data.msg || "Wrong Credentials");
     }
   } catch (error) {
     console.log(error);
-    swal("Some error occurred");
+    swal("Some error occurred. Please try again.");
   }
 });
 

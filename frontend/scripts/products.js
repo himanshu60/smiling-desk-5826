@@ -1,10 +1,9 @@
-const api_base_url = "http://localhost:8080";
 const div = document.querySelector("#products");
 const filterByCategory = document.getElementById("filter-by-category");
 const sortByPrice = document.getElementById("sort-by-price");
 const sortByRatings = document.getElementById("sort-by-ratings");
 const token = localStorage.getItem("token");
-const deploy_url = "https://tough-hen-underclothes.cyclic.app";
+// deploy_url is provided globally by config.js
 
 getProducts();
 
@@ -34,6 +33,8 @@ function displayProducts(data) {
 
     const image = document.createElement("img");
     image.setAttribute("src", el.image);
+    image.setAttribute("alt", el.name);
+    image.setAttribute("loading", "lazy");
 
     const name = document.createElement("h2");
     name.innerText = el.name;
@@ -97,6 +98,7 @@ async function addToCartfun(prod) {
         Authorization: token,
       },
     });
+    const data = await res.json();
     if (res.ok) {
       swal({
         title: "Product has been Added.",
@@ -105,8 +107,7 @@ async function addToCartfun(prod) {
         button: "OK",
       });
     } else {
-      console.log(res);
-      swal(res.json());
+      swal(data.msg || "Could not add to cart");
     }
   } catch (error) {
     console.log(error);
@@ -131,7 +132,7 @@ filterByCategory.addEventListener("change", async () => {
     );
     const data = await res.json();
     displayProducts(data);
-  } else if (filterByCategory != "") {
+  } else if (filterByCategory.value != "") {
     const res = await fetch(
       `${deploy_url}/products/?category=${filterByCategory.value}`
     );

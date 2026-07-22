@@ -5,7 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Click & Collect | Home Page</title>
+    <title>Click &amp; Collect | Shop Mobiles, Electronics, Fashion &amp; More</title>
+    <meta name="description" content="Click & Collect is an online store to browse and buy mobiles, electronics, appliances, fashion and more at low prices with great offers." />
+    <meta name="theme-color" content="#2874f0" />
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Click & Collect — Online Shopping" />
+    <meta property="og:description" content="Browse and buy mobiles, electronics, fashion and more at low prices." />
+    <meta property="og:image" content="./images/click__collect-removebg-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="shortcut icon" href="./images/supermart-favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/navbar.css" />
     <link rel="stylesheet" href="./styles/index.css" />
@@ -15,10 +23,10 @@
 <body>
     <nav>
         <!-- Navbar -->
-        <img href="./index.html" id="logo" src="./images/click__collect-removebg-preview.png" alt="">
+        <img href="./index.html" id="logo" src="./images/click__collect-removebg-preview.png" alt="Click & Collect home">
         <div id="search-div">
-            <input id="search-inputs" type="text" placeholder="Search for Products">
-            <button><img id="search-btn" src="./images/magnifying-glass-search.png" alt=""></button>
+            <input id="search-inputs" type="text" placeholder="Search for Products" aria-label="Search for products">
+            <button aria-label="Search"><img id="search-btn" src="./images/magnifying-glass-search.png" alt=""></button>
         </div>
        
         <button id="login-btn">Login</button>
@@ -222,6 +230,7 @@
 </body>
 
 </html>
+<script src="./scripts/config.js"></script>
 <script type="module" src="./scripts/index.js"></script>
 <script src="./scripts/nav.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

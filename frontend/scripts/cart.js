@@ -1,5 +1,4 @@
 const mtCart = document.createElement("h1");
-const base_url = "http://localhost:8080";
 const token = localStorage.getItem("token");
 let cartDiv = document.querySelector("#cart1");
 let id = localStorage.getItem("id");
@@ -47,6 +46,8 @@ function displayProducts(data) {
 
     let image = document.createElement("img");
     image.setAttribute("src", elem.image);
+    image.setAttribute("alt", elem.name);
+    image.setAttribute("loading", "lazy");
 
     let name = document.createElement("h2");
     name.innerText = elem.name;

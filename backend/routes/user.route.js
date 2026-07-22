@@ -4,67 +4,62 @@ const { UserModel } = require("../models/user.model.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-userRouter.get("/", async (req, res) => {
-    try {
-        const data = await UserModel.find();
-        res.json(data);
-    } catch (error) {
-        console.log(error);
-        res.json({ msg: error });
-    }
-})
-
-
 userRouter.post("/register", async (req, res) => {
     const { name, email, phone, password } = req.body;
+
+    if ([name, email, phone, password].some((f) => typeof f !== "string" || !f)) {
+        return res.status(400).json({ msg: "All fields are required" });
+    }
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email)) {
+        return res.status(400).json({ msg: "Please enter a valid email address" });
+    }
+
     try {
-        bcrypt.hash(password, 5, async (err, hashed_pass) => {
-            if (err) {
-                res.send("Something went wrong");
-                console.log(err);
-            } else {
-                const user = new UserModel({ name, email, phone, password: hashed_pass });
-                await user.save();
-                res.json("User has been registered");
-            }
-        });
+        const existing = await UserModel.findOne({ email });
+        if (existing) {
+            return res.status(409).json({ msg: "An account with this email already exists" });
+        }
+
+        const hashed_pass = await bcrypt.hash(password, 5);
+        const user = new UserModel({ name, email, phone, password: hashed_pass });
+        await user.save();
+        res.status(201).json({ msg: "User has been registered" });
     } catch (error) {
         console.log(error);
-        res.json({ msg: error });
+        res.status(500).json({ msg: "Something went wrong during registration" });
     }
 });
-
 
 userRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
-    const user = await UserModel.findOne({ email });
+
+    if (typeof email !== "string" || typeof password !== "string" || !email || !password) {
+        return res.status(400).json({ msg: "Email and password are required" });
+    }
+
     try {
-        if (user) {
-            bcrypt.compare(password, user.password, (err, result) => {
-                if (err) {
-                    res.status(500).send("Something went wrong");
-                    console.log(err);
-                } else {
-                    if (result) {
-                        const token = jwt.sign({ _id: user._id }, process.env.key);
-                        console.log(token)
-                        res.json({ msg: "Login Successfull", token,"name": user.name,"userid":user._id });
-                    
-                    } else {
-                        res.status(401).json("Wrong Credentials");
-                    }
-                }
-            })
-        } else {
-            res.status(404).json("User Not found");
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ msg: "User not found" });
         }
+
+        const result = await bcrypt.compare(password, user.password);
+        if (!result) {
+            return res.status(401).json({ msg: "Wrong credentials" });
+        }
+
+        const token = jwt.sign({ _id: user._id }, process.env.key, { expiresIn: "7d" });
+        res.json({
+            msg: "Login Successful",
+            token,
+            name: user.name,
+            userid: user._id,
+        });
     } catch (error) {
         console.log(error);
-        res.json({ msg: error });
+        res.status(500).json({ msg: "Something went wrong during login" });
     }
 });
-
-
-
 
 module.exports = { userRouter };

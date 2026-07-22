@@ -1,0 +1,202 @@
+/* =====================================================================
+   enhance.css — global polish layer for Click & Collect
+   Loaded LAST so it can refine the existing UI without changing markup.
+   Flipkart-style palette, smooth animations, and responsive fixes.
+   ===================================================================== */
+
+:root {
+  --cc-blue: #2874f0;
+  --cc-blue-dark: #1c5bd6;
+  --cc-orange: #ff9f00;
+  --cc-cta: #fb641b;
+  --cc-green: #388e3c;
+  --cc-ink: #212121;
+  --cc-muted: #878787;
+  --cc-line: #eef0f3;
+  --cc-bg: #f1f3f6;
+  --cc-radius: 10px;
+  --cc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --cc-shadow-md: 0 6px 18px rgba(0, 0, 0, 0.10);
+  --cc-shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.14);
+  --cc-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; }
+body { background-color: var(--cc-bg); }
+
+/* Global smooth interactions for buttons, links, inputs, images */
+button,
+a,
+input,
+select,
+img,
+#products > div,
+#top-offers > div,
+#mid-sec img,
+#category > div {
+  transition: transform 0.25s var(--cc-ease), box-shadow 0.25s var(--cc-ease),
+    background-color 0.2s var(--cc-ease), color 0.2s var(--cc-ease),
+    opacity 0.4s var(--cc-ease);
+}
+
+/* ---------- Entrance animations ---------- */
+@keyframes cc-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cc-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes cc-pop-in {
+  0%   { opacity: 0; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes cc-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes cc-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Product rows fade up as they render (works for dynamically added nodes) */
+#products > div {
+  animation: cc-fade-up 0.5s var(--cc-ease) both;
+  border-radius: var(--cc-radius);
+  background: #fff;
+  margin: 10px auto;
+  box-shadow: var(--cc-shadow-sm);
+  border-bottom: none !important;
+}
+#products > div:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--cc-shadow-md);
+}
+
+/* Flipkart-style green rating pill */
+#products span,
+#main span {
+  background-color: var(--cc-green) !important;
+  color: #fff;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+#products span svg,
+#main span svg { fill: #fff; }
+
+/* CTA-style "Add to Cart" buttons */
+#products > div > div > button,
+#main button {
+  background-color: var(--cc-cta) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+}
+#products > div > div > button:hover,
+#main button:hover {
+  background-color: #e85d18 !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: var(--cc-shadow-md);
+}
+button:active { transform: translateY(0) scale(0.98); }
+
+/* Home page cards + category tiles lift on hover */
+#top-offers > div:hover,
+#mid-sec img:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--cc-shadow-md);
+}
+#category > div:hover { transform: translateY(-3px); }
+#slider > img { border-radius: var(--cc-radius); }
+
+/* Login button subtle hover */
+#login-btn:hover { transform: translateY(-1px); box-shadow: var(--cc-shadow-md); }
+
+/* ---------- Auth popups: entrance + mobile responsiveness ---------- */
+#login-popup,
+#register-popup { animation: cc-pop-in 0.28s var(--cc-ease) both; }
+
+@media screen and (max-width: 768px) {
+  #login-popup,
+  #register-popup {
+    width: 92vw !important;
+    height: auto !important;
+    max-height: 88vh;
+    left: 4vw !important;
+    top: 6vh !important;
+    flex-direction: column !important;
+    overflow-y: auto;
+  }
+  #login-popup > div:nth-child(1),
+  #register-popup > div:nth-child(1),
+  #login-popup > div:nth-child(2),
+  #register-popup > div:nth-child(2) {
+    width: auto !important;
+    padding: 18px 22px !important;
+  }
+}
+
+/* ---------- Loading skeleton (opt-in via .cc-skeleton) ---------- */
+.cc-skeleton {
+  background: #eceff3;
+  background-image: linear-gradient(90deg, #eceff3 0px, #f6f7f9 200px, #eceff3 400px);
+  background-size: 800px 100%;
+  animation: cc-shimmer 1.2s infinite linear;
+  border-radius: var(--cc-radius);
+}
+
+/* ---------- Image fade-in on load ---------- */
+img[data-cc-fade] { opacity: 0; }
+img[data-cc-fade].cc-loaded { opacity: 1; }
+
+/* ---------- Scroll-to-top button ---------- */
+#cc-scroll-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: var(--cc-blue);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--cc-shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  z-index: 50;
+}
+#cc-scroll-top.cc-show { opacity: 1; visibility: visible; transform: translateY(0); }
+#cc-scroll-top:hover { background: var(--cc-blue-dark); transform: translateY(-3px); }
+
+/* ---------- Button ripple ---------- */
+.cc-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.55);
+  animation: cc-ripple-anim 0.6s linear;
+  pointer-events: none;
+}
+@keyframes cc-ripple-anim {
+  to { transform: scale(3.2); opacity: 0; }
+}
+
+/* ---------- Reveal on scroll ---------- */
+.cc-reveal { opacity: 0; transform: translateY(22px); }
+.cc-reveal.cc-in { opacity: 1; transform: translateY(0); transition: all 0.6s var(--cc-ease); }
+
+/* Respect users who prefer no motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto !important; }
+  .cc-reveal { opacity: 1; transform: none; }
+}

@@ -1,4 +1,3 @@
-
 const express = require("express");
 const { ProductModel } = require("../models/product.model");
 const productRouter = express.Router();
@@ -7,72 +6,33 @@ productRouter.post("/add", async (req, res) => {
     try {
         const product = new ProductModel(req.body);
         await product.save();
-        res.send("Product added");
+        res.status(201).json({ msg: "Product added", product });
     } catch (error) {
         console.log(error);
-        res.send(error);
+        res.status(400).json({ msg: "Could not add product" });
     }
-})
+});
 
 productRouter.get("/", async (req, res) => {
-    const category =req.query.category; 
-    // const {filtMobiles=["mobiles"]}=req.query;
-    // const {filtLaptops=["laptops"]}=req.query;
-    // const {filtGroceries=["groceries"]}=req.query;
-    const order = req.query.sort;
-    const title = req.query.title;
-    const user_id=req.body;
+    const { category, sort, title } = req.query;
+
     try {
-        //    if(category){
-        //     const data = await ProductModel.find({ category });
-        //     res.json(data);
-        // }
+        // Build the filter incrementally so category, title and sort compose.
+        const filter = {};
+        if (category) filter.category = category;
+        if (title) filter.name = { $regex: title, $options: "i" };
 
-        if (category) {
-            const data = await ProductModel.find({$and:[{user_id },{category:{$in:category}}]});
-            res.json(data);
+        let query = ProductModel.find(filter);
 
-        }
-        //  else if (filtLaptops ) {
-        //     const data = await ProductModel.find({$and:[{user_id },{category:{$in:filtLaptops}}]});
-        //     res.json(data);
+        if (sort === "asc") query = query.sort({ price: 1 });
+        else if (sort === "dsc") query = query.sort({ price: -1 });
 
-        // }
-        // else if (filtGroceries) {
-        //     const data = await ProductModel.find({$and:[{user_id },{category:{$in:filtGroceries}}]});
-        //     res.json(data);
-
-        // }
-
-        
-        else if (order && category) {
-            if (order == "asc") {
-                const data = await ProductModel.find({ category }).sort({ price: 1 });
-                res.json(data);
-            } else if (order == "dsc") {
-                const data = await ProductModel.find({ category }).sort({ price: -1 });
-                res.json(data);
-            }
-        } else if (order) {
-            if (order == "asc") {
-                const data = await ProductModel.find().sort({ price: 1 });
-                res.json(data);
-            } else if (order == "dsc") {
-                const data = await ProductModel.find().sort({ price: -1 });
-                res.json(data);
-            }
-        } else if (title) {
-            const data = await ProductModel.find({ name: { $regex: title, $options: "si" } });
-            res.json(data);
-            // console.log(title)
-        } else {
-            const data = await ProductModel.find();
-            res.json(data);
-        }
+        const data = await query;
+        res.json(data);
     } catch (error) {
         console.log(error);
-        res.send(error);
+        res.status(500).json({ msg: "Could not fetch products" });
     }
-})
+});
 
-module.exports = { productRouter }
+module.exports = { productRouter };
