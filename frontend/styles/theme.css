@@ -29,8 +29,10 @@ body {
   font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: var(--cc-bg);
   color: var(--cc-ink);
-  overflow-x: hidden;
 }
+/* Prevent horizontal scroll WITHOUT making <body> a scroll container
+   (overflow-x:hidden on body/html would break position:sticky on the navbar). */
+html { overflow-x: clip; }
 a { text-decoration: none; }
 img { max-width: 100%; }
 
