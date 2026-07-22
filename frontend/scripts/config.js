@@ -16,6 +16,10 @@
   // Backwards-compatible aliases used by the existing page scripts.
   window.deploy_url = window.API_BASE_URL;
 
+  // Redesigned pages (Bootstrap + theme.css + components.js) opt out of the
+  // legacy enhancement layer by including an #app-nav mount point.
+  if (document.getElementById("app-nav")) return;
+
   // Inject the global enhancement layer (styles + animations) on every page
   // that loads config.js — no need to edit each page's <head>.
   function inject() {

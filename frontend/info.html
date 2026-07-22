@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Click &amp; Collect</title>
+  <link rel="shortcut icon" href="./images/supermart-favicon.png" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles/theme.css" />
+</head>
+
+<body>
+  <div id="app-nav"></div>
+
+  <div class="container">
+    <div class="cc-filter-card text-center my-5 py-5" style="max-width:640px;margin-inline:auto">
+      <i id="cc-info-icon" class="bi bi-info-circle fs-1 text-primary"></i>
+      <h3 class="fw-bold mt-3" id="cc-info-title">Page</h3>
+      <p class="text-muted" id="cc-info-text">This section is coming soon.</p>
+      <a href="index.html" class="btn btn-primary mt-2"><i class="bi bi-house"></i> Back to Home</a>
+      <a href="products.html" class="btn btn-outline-primary mt-2"><i class="bi bi-bag"></i> Continue Shopping</a>
+    </div>
+  </div>
+
+  <div id="app-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./scripts/config.js"></script>
+  <script src="./scripts/components.js"></script>
+  <script>
+    (function () {
+      var MAP = {
+        notifications: ["bi-bell", "Notifications", "You have no new notifications right now."],
+        "customer-care": ["bi-headset", "Customer Care", "Reach us at support@clickcollect.demo or 1800-000-000, 24x7."],
+        orders: ["bi-box-seam", "Your Orders", "Your order history will appear here once you start shopping."],
+        wishlist: ["bi-heart", "Your Wishlist", "Items you save with the heart icon will show up here."],
+        "gift-cards": ["bi-gift", "Gift Cards", "Buy and redeem Click & Collect gift cards — coming soon."],
+        help: ["bi-question-circle", "Help Center", "Find answers about orders, shipping, returns and payments."],
+        about: ["bi-building", "About Us", "Click & Collect is a learning e-commerce project built with Node.js, Express, MongoDB and Bootstrap."],
+        careers: ["bi-briefcase", "Careers", "We're a demo project — but thanks for your interest!"],
+        press: ["bi-newspaper", "Press", "Media resources and announcements will appear here."],
+        shipping: ["bi-truck", "Shipping", "We offer free delivery on all demo orders."],
+        returns: ["bi-arrow-return-left", "Returns", "Easy 7-day returns on eligible items."]
+      };
+      var type = new URLSearchParams(location.search).get("type") || "help";
+      var info = MAP[type] || MAP.help;
+      document.getElementById("cc-info-icon").className = "bi " + info[0] + " fs-1 text-primary";
+      document.getElementById("cc-info-title").textContent = info[1];
+      document.getElementById("cc-info-text").textContent = info[2];
+      document.title = info[1] + " | Click & Collect";
+    })();
+  </script>
+</body>
+
+</html>

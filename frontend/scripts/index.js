@@ -1,77 +1,33 @@
-// Home page visuals are generated locally as inline SVG data-URIs — no
-// third-party/brand images, so nothing is hotlinked or impersonated.
+/* Home page — load products and render the "Trending" and "Top Picks" rows
+   using the shared card component. No third-party/brand assets. */
+(function () {
+  var featured = document.getElementById("cc-featured");
+  var picks = document.getElementById("cc-picks");
 
-const PALETTE = [
-  ["#2874f0", "#1a4fd0"],
-  ["#fb641b", "#e2540f"],
-  ["#388e3c", "#2e7d32"],
-  ["#8e24aa", "#6a1b9a"],
-  ["#00838f", "#006064"],
-  ["#f9a825", "#f57f17"],
-];
+  // show skeletons while loading
+  featured.appendChild(window.CC.skeletons(4));
+  picks.appendChild(window.CC.skeletons(4));
 
-// Escape characters that are invalid inside SVG/XML text (e.g. & < >).
-function esc(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
+  fetch(window.deploy_url + "/products")
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (!Array.isArray(data)) data = [];
+      // Trending = highest rated; Picks = a different slice
+      var byRating = data.slice().sort(function (a, b) { return b.rating - a.rating; });
+      render(featured, byRating.slice(0, 8));
+      render(picks, data.slice(8, 16).length ? data.slice(8, 16) : data.slice(0, 8));
+    })
+    .catch(function () {
+      featured.innerHTML = picks.innerHTML =
+        '<div class="cc-empty"><i class="bi bi-wifi-off"></i><p class="mt-2">Could not load products. Please retry.</p></div>';
+    });
 
-// Build a gradient SVG placeholder with a centered label, returned as a data URI.
-function placeholder(w, h, label, colors) {
-  const [c1, c2] = colors;
-  const fontSize = Math.max(16, Math.round(Math.min(w, h) / 9));
-  const svg =
-    `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 ${w} ${h}' preserveAspectRatio='xMidYMid slice'>` +
-    `<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>` +
-    `<stop offset='0' stop-color='${c1}'/><stop offset='1' stop-color='${c2}'/>` +
-    `</linearGradient></defs>` +
-    `<rect width='100%' height='100%' fill='url(#g)'/>` +
-    `<text x='50%' y='50%' fill='#ffffff' font-family='Verdana,Arial,sans-serif' ` +
-    `font-size='${fontSize}' font-weight='700' text-anchor='middle' dominant-baseline='middle'>` +
-    `${esc(label)}</text></svg>`;
-  return "data:image/svg+xml," + encodeURIComponent(svg);
-}
-
-// ---- Rotating hero banner ----
-const bannerLabels = [
-  "Click & Collect — Big Savings Days",
-  "Top Deals on Mobiles & Laptops",
-  "Fresh Grocery, Delivered",
-  "New Season, New Styles",
-  "Members Save More",
-];
-const banner_imgs = bannerLabels.map((label, i) =>
-  placeholder(1688, 280, label, PALETTE[i % PALETTE.length])
-);
-
-// ---- Fill promo/offer placeholders ----
-document.querySelectorAll("img.cc-ph").forEach((img, i) => {
-  const label = img.getAttribute("data-label") || "Offer";
-  const w = 800;
-  const h = 800;
-  img.src = placeholder(w, h, label, PALETTE[i % PALETTE.length]);
-});
-
-// ---- Category tiles navigate to the products page (with a filter when known) ----
-const categories = document.querySelectorAll("#category p");
-categories.forEach((el) => {
-  el.addEventListener("click", () => {
-    const cat = el.getAttribute("data-cat");
-    window.location.href = cat
-      ? `products.html?category=${encodeURIComponent(cat)}`
-      : "products.html";
-  });
-});
-
-// ---- Animate the hero banner ----
-let i = 0;
-const bannerEl = document.querySelector("#banner-img");
-if (bannerEl) {
-  bannerEl.src = banner_imgs[0];
-  setInterval(() => {
-    i = i === banner_imgs.length - 1 ? 0 : i + 1;
-    bannerEl.src = banner_imgs[i];
-  }, 3000);
-}
+  function render(container, list) {
+    container.innerHTML = "";
+    if (!list.length) {
+      container.innerHTML = '<div class="cc-empty"><i class="bi bi-box"></i><p class="mt-2">No products yet.</p></div>';
+      return;
+    }
+    list.forEach(function (p) { container.appendChild(window.CC.productCard(p)); });
+  }
+})();

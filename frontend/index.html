@@ -2,189 +2,101 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Click &amp; Collect | Shop Mobiles, Electronics, Fashion &amp; More</title>
-    <meta name="description" content="Click & Collect is an online store to browse and buy mobiles, electronics, appliances, fashion and more at low prices with great offers." />
-    <meta name="theme-color" content="#2874f0" />
-    <!-- Open Graph / social sharing -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Click & Collect — Online Shopping" />
-    <meta property="og:description" content="Browse and buy mobiles, electronics, fashion and more at low prices." />
-    <meta property="og:image" content="./images/click__collect-removebg-preview.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="shortcut icon" href="./images/supermart-favicon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="./styles/navbar.css" />
-    <link rel="stylesheet" href="./styles/index.css" />
-    <link rel="stylesheet" href="./styles/footer.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Click &amp; Collect | Shop Mobiles, Electronics, Fashion &amp; More</title>
+  <meta name="description" content="Click & Collect — shop mobiles, electronics, grocery, fashion and more at great prices with fast delivery." />
+  <meta name="theme-color" content="#2874f0" />
+  <meta property="og:title" content="Click & Collect — Online Shopping" />
+  <meta property="og:description" content="Browse and buy mobiles, electronics, fashion and more at low prices." />
+  <link rel="shortcut icon" href="./images/supermart-favicon.png" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles/theme.css" />
 </head>
 
 <body>
-    <nav>
-        <!-- Navbar -->
-        <img href="./index.html" id="logo" src="./images/click__collect-removebg-preview.png" alt="Click & Collect home">
-        <div id="search-div">
-            <input id="search-inputs" type="text" placeholder="Search for Products" aria-label="Search for products">
-            <button aria-label="Search"><img id="search-btn" src="./images/magnifying-glass-search.png" alt=""></button>
-        </div>
-       
-        <button id="login-btn">Login</button>
-        <p>Become a Seller</p>
-        <p>More</p>
+  <div id="app-nav"></div>
 
-        <div id="cart-btn"> <img id="cart" src="./images/cart.png" alt=""> Cart</div>
-    </nav>
-    <!-- profile, orders -->
-    <div id="profile-popup">
-        <p>New costumer? <a href="">Sign Up</a></p>
-        <a href=""> <img src="./images/profile-user.png" alt=""> My Profile</a>
-        <a href=""> <img src="./images/star.png" alt=""> Click & collect Plus Zone</a>
-        <a href=""><img src="./images/courier.png" alt=""> Orders</a>
-        <a href=""><img src="./images/heart.png" alt=""> Wishlist</a>
-        <a href=""><img src="./images/gift.png" alt=""> Rewards</a>
-        <a href=""><img src="./images/wallet.png" alt=""> Gift Cards</a>
+  <!-- Category strip -->
+  <div class="cc-cats">
+    <div class="container-fluid px-3">
+      <div class="cc-cats-inner">
+        <a class="cc-cat" href="products.html"><span class="cc-cat-ico"><i class="bi bi-tags"></i></span><br><span>Top Offers</span></a>
+        <a class="cc-cat" href="products.html?category=mobiles"><span class="cc-cat-ico"><i class="bi bi-phone"></i></span><br><span>Mobiles</span></a>
+        <a class="cc-cat" href="products.html?category=laptops"><span class="cc-cat-ico"><i class="bi bi-laptop"></i></span><br><span>Electronics</span></a>
+        <a class="cc-cat" href="products.html"><span class="cc-cat-ico"><i class="bi bi-tv"></i></span><br><span>Appliances</span></a>
+        <a class="cc-cat" href="products.html"><span class="cc-cat-ico"><i class="bi bi-bag-heart"></i></span><br><span>Fashion</span></a>
+        <a class="cc-cat" href="products.html"><span class="cc-cat-ico"><i class="bi bi-flower1"></i></span><br><span>Beauty</span></a>
+        <a class="cc-cat" href="products.html"><span class="cc-cat-ico"><i class="bi bi-lamp"></i></span><br><span>Furniture</span></a>
+        <a class="cc-cat" href="products.html"><span class="cc-cat-ico"><i class="bi bi-airplane"></i></span><br><span>Flights</span></a>
+        <a class="cc-cat" href="products.html?category=groceries"><span class="cc-cat-ico"><i class="bi bi-cart4"></i></span><br><span>Grocery</span></a>
+      </div>
     </div>
+  </div>
 
-    <!-- login -->
-    <div id="login-popup">
-        <div>
-            <h2>Login</h2>
-            <p>Get access to your Orders, Wishlist and Recommendations</p>
-        </div>
-        <div>
-            <img src="./images/close.png" alt="" id="login-popup-closebtn">
-            <form id="login-form">
-                <label>Email</label>
-                <input type="email" id="log-email" required>
-                <label>Password</label>
-                <input type="password" id="log-pass" required>
-                <p>Don't have an account? <a href="">Register</a></p>
-                <input type="submit" value="Login">
-            </form>
-        </div>
-    </div>
-
-    <!-- Register -->
-    <div id="register-popup">
-        <div>
-            <h2>Looks like you are new here!</h2>
-            <p>Sign up to get started</p>
-        </div>
-        <div>
-            <img src="./images/close.png" alt="" id="register-popup-closebtn">
-            <form id="register-form">
-                <label for="">Name</label>
-                <input type="text" required>
-                <label>Email</label>
-                <input type="email" id="reg-email" required>
-                <label for="">Phone</label>
-                <input type="number" required>
-                <label>Password</label>
-                <input type="password" id="reg-pass" required>
-                <p>Already have an account? <a href="">Login</a></p>
-                <input type="submit" value="Sign Up">
-            </form>
-        </div>
-    </div>
-
-    <!-- Category -->
-    <div id="category">
-        <div><p data-cat=""><span class="cat-ico">🏷️</span><br>Top Offers</p></div>
-        <div><p data-cat="mobiles"><span class="cat-ico">📱</span><br>Mobiles</p></div>
-        <div><p data-cat="laptops"><span class="cat-ico">💻</span><br>Electronics</p></div>
-        <div><p data-cat=""><span class="cat-ico">🧺</span><br>Appliances</p></div>
-        <div><p data-cat=""><span class="cat-ico">👗</span><br>Fashion</p></div>
-        <div><p data-cat=""><span class="cat-ico">💄</span><br>Beauty</p></div>
-        <div><p data-cat=""><span class="cat-ico">🛋️</span><br>Furniture</p></div>
-        <div><p data-cat=""><span class="cat-ico">✈️</span><br>Flights</p></div>
-        <div><p data-cat="groceries"><span class="cat-ico">🛒</span><br>Grocery</p></div>
-    </div>
-    <!-- top end -->
-    <div id="slider">
-        <img id="banner-img" alt="Featured offers" />
-    </div>
-    <div id="b-offers">
-        <img class="cc-ph" data-label="Big Savings Days" alt="Featured offer">
-    </div>
-
-    <div id="top-offers">
-        <div><img class="cc-ph" data-label="Electronics Deals" alt="Deal"></div>
-        <div><img class="cc-ph" data-label="Top Mobiles" alt="Deal"></div>
-        <div><img class="cc-ph" data-label="Home & Kitchen" alt="Deal"></div>
-        <div><img class="cc-ph" data-label="Fashion Picks" alt="Deal"></div>
-    </div>
-
-    <div id="mid-sec">
-        <div><img class="cc-ph" data-label="Best of Mobiles" alt="Offer"></div>
-        <div><img class="cc-ph" data-label="Laptops & PCs" alt="Offer"></div>
-        <div><img class="cc-ph" data-label="Grocery Savings" alt="Offer"></div>
-        <div><img class="cc-ph" data-label="Beauty & Care" alt="Offer"></div>
-        <div><img class="cc-ph" data-label="Furniture" alt="Offer"></div>
-        <div><img class="cc-ph" data-label="Trending Now" alt="Offer"></div>
-    </div>
-    <div id="top-offers">
-        <div><img class="cc-ph" data-label="Under ₹999" alt="Deal"></div>
-        <div><img class="cc-ph" data-label="New Arrivals" alt="Deal"></div>
-        <div><img class="cc-ph" data-label="Clearance" alt="Deal"></div>
-        <div><img class="cc-ph" data-label="Combo Offers" alt="Deal"></div>
-    </div>
-
-    <!-- footer -->
-    <footer>
-        <div>
-            <div>
-                <h3>ABOUT Click & Collect Mart</h3>
-                <p>Press Room</p>
-                <p>Company Info</p>
-                <p>Executive Team</p>
-                <p>Careers</p>
-                <p>Recycling Program</p>
-                <p>Blog</p>
+  <div class="container">
+    <!-- Hero carousel -->
+    <div id="ccHero" class="carousel slide cc-hero" data-bs-ride="carousel" data-bs-interval="4000">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#ccHero" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#ccHero" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#ccHero" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner" style="border-radius:var(--cc-radius)">
+        <div class="carousel-item active">
+          <div class="cc-slide" style="background:linear-gradient(120deg,#2874f0,#0b3ea8)">
+            <div class="cc-slide-content">
+              <h2>Big Savings Days</h2>
+              <p>Up to 70% off on mobiles, laptops &amp; electronics.</p>
+              <a href="products.html?category=mobiles" class="btn btn-light">Shop Mobiles <i class="bi bi-arrow-right"></i></a>
             </div>
-            <div>
-                <h3>HELP</h3>
-                <p>Product & Help Center</p>
-                <p>Shipping</p>
-                <p>Satisfaction Guarantee</p>
-                <p>Promotional Terms & Conditions</p>
-                <p>FAQs</p>
-                <p>Super Mart</p>
-                <p>Site Map</p>
-            </div>
+          </div>
         </div>
-
-        <!-- Social -->
-        <div id="social">
-            <div>
-                <h2>Let's Get Social</h2>
+        <div class="carousel-item">
+          <div class="cc-slide" style="background:linear-gradient(120deg,#fb641b,#b8390a)">
+            <div class="cc-slide-content">
+              <h2>Fresh Grocery, Daily</h2>
+              <p>Everyday essentials delivered to your door.</p>
+              <a href="products.html?category=groceries" class="btn btn-light">Shop Grocery <i class="bi bi-arrow-right"></i></a>
             </div>
-            <div>
-
-                <a href="#" target="_blank"><img class="s-logos"
-                        src="./images/2959749_facebook_icon.png" alt="">
-                </a>
-
-                <a href="#" target="_blank">
-                    <img class="s-logos" src="./images/2959748_instagram_photo_share_icon.png" alt="">
-                </a>
-
-                <a href="#" target="_blank">
-                    <img class="s-logos" src="./images/2959742_broadcast_google_streaming_video_youtube_icon.png"
-                        alt="">
-                </a>
-
-                <a href="#" target="_blank">
-                    <img class="s-logos" src="./images/2959740_bird_news_tweet_twitter_icon.png" alt="">
-                </a>
-            </div>
+          </div>
         </div>
-    </footer>
+        <div class="carousel-item">
+          <div class="cc-slide" style="background:linear-gradient(120deg,#388e3c,#1b5e20)">
+            <div class="cc-slide-content">
+              <h2>Top Tech Deals</h2>
+              <p>Latest laptops and gadgets at unbeatable prices.</p>
+              <a href="products.html?category=laptops" class="btn btn-light">Shop Electronics <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#ccHero" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+      <button class="carousel-control-next" type="button" data-bs-target="#ccHero" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+    </div>
 
+    <!-- Trending -->
+    <div class="cc-section-head">
+      <h3>Trending Deals</h3>
+      <a href="products.html" class="text-decoration-none fw-semibold">View all <i class="bi bi-chevron-right"></i></a>
+    </div>
+    <div class="row g-3" id="cc-featured"></div>
+
+    <!-- Top picks -->
+    <div class="cc-section-head">
+      <h3>Top Picks for You</h3>
+      <a href="products.html" class="text-decoration-none fw-semibold">View all <i class="bi bi-chevron-right"></i></a>
+    </div>
+    <div class="row g-3 mb-4" id="cc-picks"></div>
+  </div>
+
+  <div id="app-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./scripts/config.js"></script>
+  <script src="./scripts/components.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
-<script src="./scripts/config.js"></script>
-<script type="module" src="./scripts/index.js"></script>
-<script src="./scripts/nav.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

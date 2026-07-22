@@ -2,121 +2,103 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Products | Click & collect</title>
-    <link rel="shortcut icon" href="./images/supermart-favicon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="./styles/navbar.css" />
-    <link rel="stylesheet" href="./styles/products.css" />
-    <link rel="shortcut icon" href="../Frontend/images/supermart-favicon.png" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products | Click &amp; Collect</title>
+  <meta name="description" content="Browse and filter products by category, price and rating on Click & Collect." />
+  <link rel="shortcut icon" href="./images/supermart-favicon.png" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles/theme.css" />
 </head>
 
 <body>
-    <nav>
-        <img id="logo" src="./images/click__collect-removebg-preview.png" alt="" />
-        <div id="search-div">
-            <input id="search-inputs" type="text" placeholder="Search for Products" />
-            <button>
-                <img id="search-btn" src="./images/magnifying-glass-search.png" alt="" />
-            </button>
-        </div>
-        <button id="login-btn">Login</button>
-        <p>Become a Seller</p>
-        <p>More</p>
+  <div id="app-nav"></div>
 
-        <div id="cart-btn"><img id="cart" src="./images/cart.png" alt="" /> Cart</div>
-    </nav>
-    <!-- profile, orders -->
-    <div id="profile-popup">
-        <p>New costumer? <a href="">Sign Up</a></p>
-        <a href=""><img src="./images/profile-user.png" alt="" /> My Profile</a>
-        <a href=""><img src="./images/star.png" alt="" /> SuperMart Plus Zone</a>
-        <a href=""><img src="./images/courier.png" alt="" /> Orders</a>
-        <a href=""><img src="./images/heart.png" alt="" /> Wishlist</a>
-        <a href=""><img src="./images/gift.png" alt="" /> Rewards</a>
-        <a href=""><img src="./images/wallet.png" alt="" /> Gift Cards</a>
+  <div class="container py-3">
+    <!-- results bar -->
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div>
+        <h5 class="fw-bold mb-0" id="cc-results-title">All Products</h5>
+        <small class="text-muted" id="cc-results-count">Loading…</small>
+      </div>
+      <button class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#ccFilters">
+        <i class="bi bi-sliders"></i> Filters
+      </button>
     </div>
 
-    <!-- login -->
-    <div id="login-popup">
-        <div>
-            <h2>Login</h2>
-            <p>Get access to your Orders, Wishlist and Recommendations</p>
+    <div class="row g-3">
+      <!-- Sidebar (sticky on desktop, offcanvas drawer on mobile) -->
+      <div class="col-lg-3">
+        <div class="offcanvas-lg offcanvas-start cc-sidebar" tabindex="-1" id="ccFilters">
+          <div class="offcanvas-header d-lg-none">
+            <h5 class="offcanvas-title fw-bold">Filters</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#ccFilters"></button>
+          </div>
+          <div class="offcanvas-body d-block p-0">
+            <div class="cc-filter-card">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="mb-0">Filters</h6>
+                <button class="btn btn-sm btn-link text-decoration-none p-0" id="f-reset">Reset</button>
+              </div>
+            </div>
+            <div class="cc-filter-card">
+              <h6><i class="bi bi-grid me-1"></i> Category</h6>
+              <select class="form-select cc-form-select" id="f-category">
+                <option value="">All categories</option>
+                <option value="mobiles">Mobiles</option>
+                <option value="laptops">Laptops</option>
+                <option value="groceries">Grocery</option>
+              </select>
+            </div>
+            <div class="cc-filter-card">
+              <h6><i class="bi bi-sort-down me-1"></i> Sort by Price</h6>
+              <select class="form-select cc-form-select" id="f-sort">
+                <option value="">Featured</option>
+                <option value="asc">Price: Low to High</option>
+                <option value="dsc">Price: High to Low</option>
+              </select>
+            </div>
+            <div class="cc-filter-card">
+              <h6><i class="bi bi-star me-1"></i> Rating</h6>
+              <select class="form-select cc-form-select" id="f-rating">
+                <option value="">Any rating</option>
+                <option value="4">4★ &amp; above</option>
+                <option value="3">3★ &amp; above</option>
+                <option value="5">5★ only</option>
+              </select>
+            </div>
+            <div class="cc-filter-card">
+              <h6><i class="bi bi-currency-rupee me-1"></i> Max Price</h6>
+              <input type="range" class="form-range" id="f-price" min="0" max="100000" step="1000" value="100000" />
+              <div class="d-flex justify-content-between small text-muted">
+                <span>₹0</span><span id="f-price-val">₹1,00,000</span>
+              </div>
+            </div>
+            <div class="cc-filter-card">
+              <h6><i class="bi bi-box-seam me-1"></i> Availability</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="f-instock" />
+                <label class="form-check-label" for="f-instock">In stock only</label>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-            <img src="./images/close.png" alt="" id="login-popup-closebtn" />
-            <form id="login-form">
-                <label>Email</label>
-                <input type="email" id="log-email" required />
-                <label>Password</label>
-                <input type="password" id="log-pass" required />
-                <p>Don't have an account? <a href="">Register</a></p>
-                <input type="submit" value="Login" />
-            </form>
-        </div>
-    </div>
+      </div>
 
-    <!-- Register -->
-    <div id="register-popup">
-        <div>
-            <h2>Looks like you are new here!</h2>
-            <p>Sign up to get started</p>
-        </div>
-        <div>
-            <img src="./images/close.png" alt="" id="register-popup-closebtn" />
-            <form id="register-form">
-                <label for="">Name</label>
-                <input type="text" required />
-                <label>Email</label>
-                <input type="email" id="reg-email" required />
-                <label for="">Phone</label>
-                <input type="number" required />
-                <label>Password</label>
-                <input type="password" id="reg-pass" required />
-                <p>Already have an account? <a href="">Login</a></p>
-                <input type="submit" value="Sign Up" />
-            </form>
-        </div>
+      <!-- Product grid -->
+      <div class="col-lg-9">
+        <div class="row g-3" id="cc-products"></div>
+      </div>
     </div>
-    <!-- main content of the page -->
-    <div id="prod">
-        <div id="filters">
-            <span>
-                <h3>Filter By Category</h3>
-                <select name="" id="filter-by-category">
-                    <option value="">Select</option>
-                    <option value="laptops">Laptops</option>
-                    <option value="mobiles">Mobiles</option>
-                    <option value="groceries">Grocery</option>
-                </select>
-            </span>
+  </div>
 
-            <span>
-                <h3>Sort By Price</h3>
-                <select name="" id="sort-by-price">
-                    <option value="">Select</option>
-                    <option value="htl">High to Low</option>
-                    <option value="lth">Low to High</option>
-                </select>
-            </span>
+  <div id="app-footer"></div>
 
-            <span>
-                <h3>Sort By Ratings</h3>
-                <select name="" id="sort-by-ratings">
-                    <option value="">Select</option>
-                    <option value="5">5</option>
-                    <option value="4a">4 & above</option>
-                    <option value="3a">3 & above</option>
-                </select>
-            </span>
-        </div>
-        <div id="products"></div>
-    </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./scripts/config.js"></script>
+  <script src="./scripts/components.js"></script>
+  <script src="./scripts/products.js"></script>
 </body>
 
 </html>
-<script src="./scripts/config.js"></script>
-<script type="module" src="./scripts/products.js"></script>
-<script src="./scripts/nav.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
